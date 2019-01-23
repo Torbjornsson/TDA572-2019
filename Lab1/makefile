@@ -1,8 +1,17 @@
+CXX = g++
+
+CXXFLAGS = 
+LDFLAGS = 
+LDLIBS =
+
+SRCS = main.cpp
+
+
 all: hello.exe
 
 hello.exe: main.o
-	g++ -o bin/hello.exe main.o
-main.o: main.cpp
-	g++ -c main.cpp
+	$(CXX) -o bin/hello.exe main.o
+main.o: $(SRCS)
+	$(CXX) -c $(SRCS)
 clean: 
 	rm bin/hello.exe main.o
