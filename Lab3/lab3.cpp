@@ -9,12 +9,17 @@ int main(int argc, char* argv[])
 	//Initialize here...
 	engine.init(400,400);
 	int i = 0;
+	int deltaTime = 0;
 	int lastTime = engine.getElapsedTime();
 	bool red = false;
 	while (engine.update())
 	{ 
 		//Gameloop here...
-		int currentTime = engine.getElapsedTime();
+
+		//start clock
+		deltaTime = engine.getElapsedTime() - lastTime;
+
+		//shift colors
 		engine.setColor(i, 0, 255-i, 0);
 
 		if (red && i >0)
@@ -31,11 +36,17 @@ int main(int argc, char* argv[])
 		{
 			i++;
 		}
+
+		/*fps counter				
+		if (deltaTime != 0){
+			std::cout << 1000 / deltaTime << std::endl;
+		}
+		*/
+
+		//lastTime before sleep
+		lastTime = engine.getElapsedTime();
+		usleep(16000 - deltaTime);
 		
-		
-		//std::cout << currentTime - lastTime;
-		usleep(10000 -(currentTime - lastTime));
-		lastTime = currentTime;
 	}
 	
 	//Clean up here...
