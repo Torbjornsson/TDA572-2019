@@ -1,7 +1,9 @@
 #pragma once
 
-#include "/usr/include/SDL2/SDL.h"
-//#include "SDL_ttf.h"  //Uncomment when you get to Task 2
+#include <SDL.h>
+#include <SDL_ttf.h>  //Uncomment when you get to Task 2
+#include <ft2build.h>
+#include FT_FREETYPE_H
 
 class Sprite
 {
@@ -62,7 +64,7 @@ private:
 	SDL_Window * window;
 	SDL_Renderer * renderer;
 
-	//TTF_Font* font;   //Uncomment when you get to Task 2
+	TTF_Font* font;   //Uncomment when you get to Task 2
 
 	KeyStatus key;
 };

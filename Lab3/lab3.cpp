@@ -10,8 +10,11 @@ int main(int argc, char* argv[])
 	engine.init(400,400);
 	int i = 0;
 	int deltaTime = 0;
+	int FPS = 60;
 	int lastTime = engine.getElapsedTime();
 	bool red = false;
+	char msg[256];
+
 	while (engine.update())
 	{ 
 		//Gameloop here...
@@ -37,15 +40,22 @@ int main(int argc, char* argv[])
 			i++;
 		}
 
-		/*fps counter				
+		//fps counter				
 		if (deltaTime != 0){
-			std::cout << 1000 / deltaTime << std::endl;
+			
+			float fps = 1000 / deltaTime;
+			
+			sprintf(msg, "%.3f fps", fps);
+			
+			engine.drawText(0, 0, msg);
+			std::cout << "test" << std::endl;
+			//std::cout << 1000 / deltaTime << std::endl;
 		}
-		*/
+		
 
 		//lastTime before sleep
 		lastTime = engine.getElapsedTime();
-		usleep(16000 - deltaTime);
+		usleep((1000/FPS)*1000 - deltaTime);
 		
 	}
 	

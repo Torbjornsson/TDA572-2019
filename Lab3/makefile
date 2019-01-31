@@ -1,8 +1,8 @@
 CXX = g++
 
 CXXFLAGS = 
-LDFLAGS = 
-LDLIBS = -lSDL2 -lSDL2main
+LDFLAGS = -I/usr/include/freetype2 -I/usr/include/SDL2
+LDLIBS = -lSDL2 -lSDL2main -lSDL_ttf -lfreetype
 
 SRCS = lab3.cpp avancezlib.cpp
 
@@ -10,8 +10,8 @@ SRCS = lab3.cpp avancezlib.cpp
 all: main.exe
 
 main.exe: main.o
-	$(CXX) $(LDLIBS) -o bin/main.exe lab3.o avancezlib.o
+	$(CXX) $(LDLIBS) $(LDFLAGS) -o main.exe lab3.o avancezlib.o
 main.o: $(SRCS)
-	$(CXX) -c $(SRCS)
+	$(CXX) -c $(SRCS) $(LDFLAGS)
 clean: 
-	rm bin/main.exe lab3.o
+	rm main.exe lab3.o
