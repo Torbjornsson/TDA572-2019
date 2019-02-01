@@ -5,19 +5,29 @@ int main(int argc, char* argv[])
 {
 	AvancezLib engine;
 	//Initialize here...
-	engine.init(400,400);
-	int i = 0;
+	//window and engine
+	int width = 640;
+	int height = 480;
+	engine.init(width, height);
+
+	//FPS
 	int num_frames = 0;
 	float avg_fps = 0;
 	int deltaTime = 0;
 	int sum_delta = 0;
 	int FPS = 60;
 	int lastTime = engine.getElapsedTime();
-	bool red = false;
 	char msg[256];
 
+	//player
 	Sprite * player = engine.createSprite("enemy_0.bmp");
+	int x = 0;
+	int y = 180;
 
+	//color
+	int i = 0;
+	bool red = false;
+	
 	while (engine.update())
 	{ 
 		//Gameloop here...
@@ -27,25 +37,41 @@ int main(int argc, char* argv[])
 		lastTime = engine.getElapsedTime();
 
 		sum_delta += deltaTime;
+	
 		//shift colors
 		engine.setColor(i, 0, 255-i, 0);
 
 		if (red && i >0)
 			i--;
 		else if (i == 255)
-		{
 			red = true;
-		}
-		else if (i == 0){
+		else if (i == 0)
 			red = false;
 			i++;
-		}
 		else
-		{
 			i++;
+
+		//Handle keys
+		AvancezLib::KeyStatus key;
+		engine.getKeyStatus(key);
+
+		if (key.fire)
+			SDL_Log("fire\n");
+
+		if (key.left){
+			SDL_Log("left\n");
+			if(x > 0)
+				x-=10;
 		}
 
-		player->draw(200, 200);
+		if (key.right){
+			SDL_Log("right\n");
+			if(x < 400)
+				x+=10;
+		}
+
+		//drawing sprite
+		player->draw(x, y);
 		
 		//fps counter			
 		num_frames++;	
@@ -56,10 +82,11 @@ int main(int argc, char* argv[])
 		}
 		sprintf(msg, "%.3f fps", avg_fps);
 		engine.drawText(0, 0, msg);
-		//lastTime before sleep
 		
+		//Sleep to keep fps
 		SDL_Delay(std::max((1000/FPS) - deltaTime, 0));	
 	}
+
 	//Clean up here...
 	player->destroy();
 	engine.destroy();

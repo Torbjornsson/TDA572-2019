@@ -87,7 +87,6 @@ bool AvancezLib::update(){
         }
     }
     
-    
     SDL_RenderPresent(renderer);
     SDL_RenderClear(renderer);  
 
@@ -99,8 +98,6 @@ int AvancezLib::getElapsedTime(){
 }
 
 void AvancezLib::drawText(int x, int y, const char* msg){
-    
-    
     SDL_Color black = {0, 0, 0};
     
     SDL_Surface *fsurface; 
@@ -121,8 +118,8 @@ void AvancezLib::drawText(int x, int y, const char* msg){
 
 void AvancezLib::getKeyStatus(KeyStatus & keys){
     keys.fire = key.fire;
-    keys.left = keys.left;
-    keys.right = keys.right;
+    keys.left = key.left;
+    keys.right = key.right;
 }
 
 Sprite * AvancezLib::createSprite(const char * name){
