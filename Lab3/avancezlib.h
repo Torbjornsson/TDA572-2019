@@ -2,8 +2,6 @@
 
 #include <SDL.h>
 #include <SDL_ttf.h>  //Uncomment when you get to Task 2
-#include <ft2build.h>
-#include FT_FREETYPE_H
 
 class Sprite
 {

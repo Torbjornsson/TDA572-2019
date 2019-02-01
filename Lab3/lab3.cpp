@@ -1,7 +1,5 @@
 #include "avancezlib.h"
 #include <iostream>
-#include "unistd.h"
-#include "stdio.h"
 
 int main(int argc, char* argv[])
 {
@@ -9,11 +7,16 @@ int main(int argc, char* argv[])
 	//Initialize here...
 	engine.init(400,400);
 	int i = 0;
+	int num_frames = 0;
+	float avg_fps = 0;
 	int deltaTime = 0;
+	int sum_delta = 0;
 	int FPS = 60;
 	int lastTime = engine.getElapsedTime();
 	bool red = false;
 	char msg[256];
+
+	Sprite * player = engine.createSprite("enemy_0.bmp");
 
 	while (engine.update())
 	{ 
@@ -21,7 +24,9 @@ int main(int argc, char* argv[])
 
 		//start clock
 		deltaTime = engine.getElapsedTime() - lastTime;
+		lastTime = engine.getElapsedTime();
 
+		sum_delta += deltaTime;
 		//shift colors
 		engine.setColor(i, 0, 255-i, 0);
 
@@ -40,26 +45,23 @@ int main(int argc, char* argv[])
 			i++;
 		}
 
-		//fps counter				
-		if (deltaTime != 0){
-			
-			float fps = 1000 / deltaTime;
-			
-			sprintf(msg, "%.3f fps", fps);
-			
-			engine.drawText(0, 0, msg);
-			std::cout << "test" << std::endl;
-			//std::cout << 1000 / deltaTime << std::endl;
+		player->draw(200, 200);
+		
+		//fps counter			
+		num_frames++;	
+		if (sum_delta > 100){
+			avg_fps = ((float)num_frames / sum_delta) * 1000;
+			num_frames = 0;
+			sum_delta = 0;
 		}
-		
-
+		sprintf(msg, "%.3f fps", avg_fps);
+		engine.drawText(0, 0, msg);
 		//lastTime before sleep
-		lastTime = engine.getElapsedTime();
-		usleep((1000/FPS)*1000 - deltaTime);
 		
+		SDL_Delay(std::max((1000/FPS) - deltaTime, 0));	
 	}
-	
 	//Clean up here...
+	player->destroy();
 	engine.destroy();
 	
 	return 0;
