@@ -24,6 +24,7 @@ int main(int argc, char* argv[])
 	Sprite * player = engine.createSprite("enemy_0.bmp");
 	int x = 0;
 	int y = 180;
+	float velocity = 0.5f;
 
 	//color
 	int i = 0;
@@ -59,13 +60,13 @@ int main(int argc, char* argv[])
 		if (key.left){
 			SDL_Log("left\n");
 			if(x > 0)
-				x-=10;
+				x-= velocity * deltaTime;
 		}
 
 		if (key.right){
 			SDL_Log("right\n");
 			if(x < width)
-				x+=10;
+				x+= velocity * deltaTime;
 		}
 
 		//drawing sprite
