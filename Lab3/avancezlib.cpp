@@ -3,26 +3,29 @@
 #include "stdio.h"
 
 bool AvancezLib::init(int width, int height){
+
+    //Init all subsystems of SDL
     if (SDL_Init(SDL_INIT_EVERYTHING) != 0){
-        SDL_LogError(SDL_LOG_CATEGORY_APPLICATION, "SDL init failed", SDL_GetError());
+        SDL_LogError(SDL_LOG_CATEGORY_APPLICATION, "SDL init failed! SDL_Error:\n", SDL_GetError());
         return false;
     }
+
+    //Try to create Window
     window = SDL_CreateWindow("Lab3", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, width, height, SDL_WINDOW_SHOWN);
-    if(window == NULL)
+    if(window == NULL){
+        SDL_LogError(SDL_LOG_CATEGORY_APPLICATION, "Window cannot be created! SDL_Error:\n", SDL_GetError());
         return false;
+    }
     
+    //Try to create Renderer
     renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
     if (renderer == NULL) {
+        SDL_LogError(SDL_LOG_CATEGORY_APPLICATION, "Renderer cannot be created! SDL_Error:\n", SDL_GetError());
         return false;
     }
 
+    //Init TTF Font handling
     TTF_Init();
-    font = TTF_OpenFont("space_invaders.ttf", 12);
-    if (font == NULL){
-        		SDL_LogError(SDL_LOG_CATEGORY_APPLICATION, "font cannot be created! SDL_Error: %s\n", SDL_GetError());
-                return false;
-    }
-
     int was_init = TTF_WasInit();
  
     if (was_init == 1)
@@ -33,6 +36,13 @@ bool AvancezLib::init(int width, int height){
         std::cout << "error init" << std::endl;
         // SDL_ttf was not already initialized
 
+    //Try to set the font
+    font = TTF_OpenFont("space_invaders.ttf", 12);
+    if (font == NULL){
+        SDL_LogError(SDL_LOG_CATEGORY_APPLICATION, "font cannot be created! SDL_Error: %s\n", SDL_GetError());
+        return false;
+    }
+
     SDL_SetRenderDrawColor(renderer, 0xFF, 0xFF, 0xFF, 0xFF);
     SDL_RenderClear(renderer);
 
@@ -40,6 +50,8 @@ bool AvancezLib::init(int width, int height){
 }
 
 void AvancezLib::destroy(){
+    
+    //Cleanup everything
     SDL_DestroyRenderer(renderer);
     SDL_DestroyWindow(window);
 
@@ -98,20 +110,26 @@ int AvancezLib::getElapsedTime(){
 }
 
 void AvancezLib::drawText(int x, int y, const char* msg){
+    //Font color
     SDL_Color black = {0, 0, 0};
     
+    //Create surface
     SDL_Surface *fsurface; 
     fsurface = TTF_RenderText_Solid(font, msg, black);
     
+    //Create texture to render
     SDL_Texture* msgTexture = SDL_CreateTextureFromSurface(renderer, fsurface);
 
+    //Set the size of the texture
     int width, height = 0;
     SDL_QueryTexture(msgTexture, NULL, NULL, &width, &height);
     
     SDL_Rect rect = {x, y, width, height};
 
+    //Render texture
     SDL_RenderCopy(renderer, msgTexture, NULL, &rect);
 
+    //Cleanup
     SDL_DestroyTexture(msgTexture);
     SDL_FreeSurface(fsurface);
 }
@@ -123,16 +141,20 @@ void AvancezLib::getKeyStatus(KeyStatus & keys){
 }
 
 Sprite * AvancezLib::createSprite(const char * name){
+    //Create surface from picture
     SDL_Surface* surface = SDL_LoadBMP(name);
     if(surface == NULL){
         SDL_LogError(SDL_LOG_CATEGORY_APPLICATION, "unable to load image", name, SDL_GetError());
         return NULL;
     }
+
+    ///Create texture to render
     SDL_Texture* texture = SDL_CreateTextureFromSurface(renderer, surface);
     if(texture == NULL){
         SDL_LogError(SDL_LOG_CATEGORY_APPLICATION, "unable to crate texture", name, SDL_GetError());
         return NULL;
     }
+    //cleanup
     SDL_FreeSurface(surface);
 
     Sprite * sprite = new Sprite(renderer, texture);
@@ -147,12 +169,14 @@ Sprite::Sprite(SDL_Renderer * renderer, SDL_Texture * texture){
 }
 
 void Sprite::draw(int x, int y){
+    //Set size and position for sprite
     SDL_Rect rect;
     rect.x = x;
     rect.y = y;
 
     SDL_QueryTexture(texture, NULL, NULL, &(rect.w), &(rect.h));
 
+    //Render sprite
     SDL_RenderCopy(renderer, texture, NULL, &rect);
 }
 

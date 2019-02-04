@@ -16,6 +16,7 @@ int main(int argc, char* argv[])
 	int deltaTime = 0;
 	int sum_delta = 0;
 	int FPS = 60;
+	int MS_Frame = 1000/FPS;
 	int lastTime = engine.getElapsedTime();
 	char msg[256];
 
@@ -31,23 +32,20 @@ int main(int argc, char* argv[])
 	while (engine.update())
 	{ 
 		//Gameloop here...
-
-		//start clock
-		deltaTime = engine.getElapsedTime() - lastTime;
-		lastTime = engine.getElapsedTime();
-
-		sum_delta += deltaTime;
 	
 		//shift colors
 		engine.setColor(i, 0, 255-i, 0);
 
 		if (red && i >0)
 			i--;
-		else if (i == 255)
+		else if (i == 255){
 			red = true;
-		else if (i == 0)
+			i--;
+		}
+		else if (i == 0){
 			red = false;
 			i++;
+		}
 		else
 			i++;
 
@@ -66,25 +64,33 @@ int main(int argc, char* argv[])
 
 		if (key.right){
 			SDL_Log("right\n");
-			if(x < 400)
+			if(x < width)
 				x+=10;
 		}
 
 		//drawing sprite
 		player->draw(x, y);
 		
-		//fps counter			
-		num_frames++;	
-		if (sum_delta > 100){
-			avg_fps = ((float)num_frames / sum_delta) * 1000;
+		//average FPS counter			
+		if (num_frames == 10){
+			avg_fps = (((float)num_frames * 1000) / sum_delta);
 			num_frames = 0;
 			sum_delta = 0;
 		}
+		//Set text and print
 		sprintf(msg, "%.3f fps", avg_fps);
 		engine.drawText(0, 0, msg);
 		
 		//Sleep to keep fps
-		SDL_Delay(std::max((1000/FPS) - deltaTime, 0));	
+		SDL_Delay(std::max((MS_Frame - (engine.getElapsedTime() - lastTime)), 0));	
+
+		//Calculate time since last frame
+		deltaTime = engine.getElapsedTime() - lastTime;
+		lastTime = engine.getElapsedTime();
+
+		//To calculate average FPS
+		num_frames++;	
+		sum_delta += deltaTime;
 	}
 
 	//Clean up here...
