@@ -6,8 +6,8 @@ int main(int argc, char* argv[])
 	AvancezLib engine;
 	//Initialize here...
 	//window and engine
-	int width = 640;
-	int height = 480;
+	const static int width = 640;
+	const static int height = 480;
 	engine.init(width, height);
 
 	//FPS
@@ -15,8 +15,8 @@ int main(int argc, char* argv[])
 	float avg_fps = 0;
 	int deltaTime = 0;
 	int sum_delta = 0;
-	int FPS = 60;
-	int MS_Frame = 1000/FPS;
+	const static int FPS = 60;
+	const static int MS_Frame = 1000/FPS;
 	int lastTime = engine.getElapsedTime();
 	char msg[256];
 
