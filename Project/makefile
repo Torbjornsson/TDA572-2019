@@ -13,14 +13,13 @@ OBJS = $(OBJ_DIR)main.o $(OBJ_DIR)avancezlib.o
 
 
 all: main.out
-	dir
 
 main.out: $(OBJS)
 	$(CXX) $(LDLIBS) $(LDFLAGS) -o $(OUT_DIR)main.out $(OBJS)
 
 $(OBJ_DIR)%.o: $(SRC_DIR)%.cpp
 	$(CXX) -c $^ $(LDFLAGS) -o $@
-dir:
+dirs:
 	mkdir $(OUT_DIR)
 	mkdir $(OBJ_DIR)
 clean: 

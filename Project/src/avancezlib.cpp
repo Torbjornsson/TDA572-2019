@@ -11,7 +11,7 @@ bool AvancezLib::init(int width, int height){
     }
 
     //Try to create Window
-    window = SDL_CreateWindow("Lab3", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, width, height, SDL_WINDOW_SHOWN);
+    window = SDL_CreateWindow("Missile Command", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, width, height, SDL_WINDOW_SHOWN);
     if(window == NULL){
         SDL_LogError(SDL_LOG_CATEGORY_APPLICATION, "Window cannot be created! SDL_Error:\n", SDL_GetError());
         return false;
@@ -37,7 +37,7 @@ bool AvancezLib::init(int width, int height){
         // SDL_ttf was not already initialized
 
     //Try to set the font
-    font = TTF_OpenFont("space_invaders.ttf", 12);
+    font = TTF_OpenFont("data/space_invaders.ttf", 12);
     if (font == NULL){
         SDL_LogError(SDL_LOG_CATEGORY_APPLICATION, "font cannot be created! SDL_Error: %s\n", SDL_GetError());
         return false;
