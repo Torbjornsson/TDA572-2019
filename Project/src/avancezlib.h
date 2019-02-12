@@ -2,6 +2,7 @@
 
 #include <SDL.h>
 #include <SDL_ttf.h>  //Uncomment when you get to Task 2
+#include <SDL2_gfxPrimitives.h>
 
 class Sprite
 {
@@ -47,6 +48,12 @@ public:
 	int getElapsedTime();
 
 	void setColor(int r, int g, int b, int a);
+
+	void drawLine(int sX, int sY, int eX, int eY);
+
+	void drawCircle(int x, int y, int r);
+
+	void drawPixel(int x, int y);
 
 	struct KeyStatus
 	{

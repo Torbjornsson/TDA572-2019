@@ -3,7 +3,7 @@
 <div id="text-table-of-contents">
 <ul>
 <li><a href="#orgheadline1">1. Missile command</a></li>
-<li><a href="#orgheadline8">2. Game features <code>[0/6]</code></a>
+<li><a href="#orgheadline8">2. Game features <code>[0/7]</code></a>
 <ul>
 <li><a href="#orgheadline2">2.1. Controls</a></li>
 <li><a href="#orgheadline3">2.2. Game loop</a></li>
@@ -22,16 +22,23 @@
 
 A clone of the classic arcade game [Missile Command](https://en.wikipedia.org/wiki/Missile_Command) where you need to protect yourself against the enemies nuclear missiles.
 
-# Game features <code>[0/6]</code><a id="orgheadline8"></a>
+# Game features <code>[0/7]</code><a id="orgheadline8"></a>
 
 A list of the features in the game making the development easier
 
 -   [ ] Controls
 -   [ ] Game loop
--   [ ] Sprites
+-   [-] Sprites
+    -   [X] Drawing circles
+    -   [ ] missiles
+    -   [ ] bases
+    -   [ ] enemies
 -   [ ] Scoring
 -   [ ] New game
 -   [ ] End game
+-   [ ] Object pools
+    -   [ ] Your missiles
+    -   [ ] Enemy weapons
 
 ## Controls<a id="orgheadline2"></a>
 
@@ -42,7 +49,7 @@ The player controls a cursor to aim the missiles, three buttons are used for sen
 ## Sprites<a id="orgheadline4"></a>
 
 Missiles, cities, aircraft, drones, cursor
-create cursor [color cursor sdl](https://wiki.libsdl.org/SDL_CreateColorCursor)
+create [color cursor sdl](https://wiki.libsdl.org/SDL_CreateColorCursor)
 
 ## Scoring<a id="orgheadline5"></a>
 

@@ -10,6 +10,9 @@ int main(int argc, char* argv[]){
 
     engine.init(width, height);
 
+    //Mouse
+    int x, y;
+
     //FPS
     char msg[256];
 	int num_frames = 0;
@@ -22,7 +25,15 @@ int main(int argc, char* argv[]){
 
     //Game loop
     while(engine.update()){
+        SDL_GetMouseState(&x, &y);
+        engine.drawCircle(x, y, 20);
+        
+        //Handle key events
+        AvancezLib::KeyStatus key;
+		engine.getKeyStatus(key);
 
+		if (key.fire)
+		    engine.drawLine(width/2, height, x, y);
 
         //average FPS counter			
 		if (num_frames == 10){

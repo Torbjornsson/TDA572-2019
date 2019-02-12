@@ -65,6 +65,22 @@ void AvancezLib::setColor(int r, int g, int b, int a){
     SDL_SetRenderDrawColor(renderer, r, g, b, a);
 }
 
+void AvancezLib::drawLine(int sX, int sY, int eX, int eY){
+    SDL_SetRenderDrawColor(renderer, 0, 0, 0, 0xFF);
+    SDL_RenderDrawLine(renderer, sX, sY, eX, eY);
+}
+
+void AvancezLib::drawCircle(int x, int y, int r){
+    int beginX = x - r;
+    int beginY = y - r;
+    SDL_RenderClear(renderer);
+    filledCircleRGBA(renderer, x, y, r, 0, 0, 0, 255);
+}
+
+void AvancezLib::drawPixel(int x, int y){
+    SDL_RenderDrawPoint(renderer, x, y);
+}
+
 bool AvancezLib::update(){
     
     SDL_Event event;
@@ -100,8 +116,10 @@ bool AvancezLib::update(){
     }
     
     SDL_RenderPresent(renderer);
-    SDL_RenderClear(renderer);  
 
+    SDL_SetRenderDrawColor(renderer, 0xFF, 0xFF, 0xFF, 0xFF);
+    SDL_RenderClear(renderer);  
+    
     return true;
 }
 
