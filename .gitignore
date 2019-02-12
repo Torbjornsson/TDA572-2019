@@ -3,4 +3,5 @@
 *.zip
 *.out
 *.pdf
-.vscode
+*.vscode
+*.exe
