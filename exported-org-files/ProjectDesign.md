@@ -3,7 +3,7 @@
 <div id="text-table-of-contents">
 <ul>
 <li><a href="#orgheadline1">1. Missile command</a></li>
-<li><a href="#orgheadline8">2. Game features <code>[0/7]</code></a>
+<li><a href="#orgheadline8">2. Game features <code>[0/8]</code></a>
 <ul>
 <li><a href="#orgheadline2">2.1. Controls</a></li>
 <li><a href="#orgheadline3">2.2. Game loop</a></li>
@@ -22,7 +22,7 @@
 
 A clone of the classic arcade game [Missile Command](https://en.wikipedia.org/wiki/Missile_Command) where you need to protect yourself against the enemies nuclear missiles.
 
-# Game features <code>[0/7]</code><a id="orgheadline8"></a>
+# Game features <code>[0/8]</code><a id="orgheadline8"></a>
 
 A list of the features in the game making the development easier
 
@@ -39,12 +39,15 @@ A list of the features in the game making the development easier
 -   [ ] Object pools
     -   [ ] Your missiles
     -   [ ] Enemy weapons
+-   [ ] Components
 
 ## Controls<a id="orgheadline2"></a>
 
 The player controls a cursor to aim the missiles, three buttons are used for sending missiles from each of the silos.
 
 ## Game loop<a id="orgheadline3"></a>
+
+Object pool for missiles, missiles have a target location, starting location and a velocity. When the missile reaches it's target location it explodes.
 
 ## Sprites<a id="orgheadline4"></a>
 

@@ -1,6 +1,6 @@
 * Missile command
   A clone of the classic arcade game [[https://en.wikipedia.org/wiki/Missile_Command][Missile Command]] where you need to protect yourself against the enemies nuclear missiles.
-* Game features [0/7]
+* Game features [0/8]
   A list of the features in the game making the development easier
   - [ ] Controls
   - [ ] Game loop
@@ -15,12 +15,12 @@
   - [ ] Object pools
     - [ ] Your missiles
     - [ ] Enemy weapons
-
+  - [ ] Components
 ** Controls
    The player controls a cursor to aim the missiles, three buttons are used for sending missiles from each of the silos.
 
 ** Game loop
-   
+   Object pool for missiles, missiles have a target location, starting location and a velocity. When the missile reaches it's target location it explodes.
    
 ** Sprites
    Missiles, cities, aircraft, drones, cursor

@@ -11,7 +11,7 @@ int main(int argc, char* argv[]){
     engine.init(width, height);
 
     //Mouse
-    int x, y;
+    int x, y, tx, ty;
 
     //FPS
     char msg[256];
@@ -32,8 +32,11 @@ int main(int argc, char* argv[]){
         AvancezLib::KeyStatus key;
 		engine.getKeyStatus(key);
 
-		if (key.fire)
+		if (key.fire){
 		    engine.drawLine(width/2, height, x, y);
+            tx = x;
+            ty = y;
+        }
 
         //average FPS counter			
 		if (num_frames == 10){
