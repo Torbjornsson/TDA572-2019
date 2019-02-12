@@ -3,6 +3,7 @@
 * Game features [0/6]
   A list of the features in the game making the development easier
   - [ ] Controls
+  - [ ] Game loop
   - [ ] Sprites
   - [ ] Scoring
   - [ ] New game
@@ -10,7 +11,18 @@
 
 ** Controls
    The player controls a cursor to aim the missiles, three buttons are used for sending missiles from each of the silos.
+
+** Game loop
+   
 ** Sprites
-   Missiles, cities, aircraft, drones
+   Missiles, cities, aircraft, drones, cursor
 ** Scoring
    At the conclusion of a level, the player receives bonus points for any remaining cities (50 points times scoring level, 1 to 6, first 254 levels; 256, levels 255 & 256) or unused missiles (5 points times scoring level, 1 to 6, first 254 levels; 256, levels 255 & 256). Between levels missile batteries are rebuilt and replenished; destroyed cities are rebuilt only at set point levels (usually per 8,000 to 12,000 points). 
+** New Game
+   Start a new round after the round is finished
+** End Game
+   End the game when the player loses
+* Extras
+  Extra game features that is nice but not needed for the demo
+  - [ ] Leaderboard
+  - [ ] Nicer sprites
