@@ -1,5 +1,5 @@
 * Missile command
-  A clone of the classic arcade game missile command where you need to protect yourself against the enemies nuclear missiles.
+  A clone of the classic arcade game [[https://en.wikipedia.org/wiki/Missile_Command][Missile Command]] where you need to protect yourself against the enemies nuclear missiles.
 * Game features [0/6]
   A list of the features in the game making the development easier
   - [ ] Controls
@@ -16,6 +16,7 @@
    
 ** Sprites
    Missiles, cities, aircraft, drones, cursor
+   create cursor [[https://wiki.libsdl.org/SDL_CreateColorCursor][color cursor sdl]]
 ** Scoring
    At the conclusion of a level, the player receives bonus points for any remaining cities (50 points times scoring level, 1 to 6, first 254 levels; 256, levels 255 & 256) or unused missiles (5 points times scoring level, 1 to 6, first 254 levels; 256, levels 255 & 256). Between levels missile batteries are rebuilt and replenished; destroyed cities are rebuilt only at set point levels (usually per 8,000 to 12,000 points). 
 ** New Game

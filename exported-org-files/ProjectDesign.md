@@ -20,7 +20,7 @@
 
 # Missile command<a id="orgheadline1"></a>
 
-A clone of the classic arcade game missile command where you need to protect yourself against the enemies nuclear missiles.
+A clone of the classic arcade game [Missile Command](https://en.wikipedia.org/wiki/Missile_Command) where you need to protect yourself against the enemies nuclear missiles.
 
 # Game features <code>[0/6]</code><a id="orgheadline8"></a>
 
@@ -42,6 +42,7 @@ The player controls a cursor to aim the missiles, three buttons are used for sen
 ## Sprites<a id="orgheadline4"></a>
 
 Missiles, cities, aircraft, drones, cursor
+create cursor [color cursor sdl](https://wiki.libsdl.org/SDL_CreateColorCursor)
 
 ## Scoring<a id="orgheadline5"></a>
 
