@@ -1,0 +1,7 @@
+Question 2
+How messages are sent and recieved?
+
+The game object has a list of all the recievers and for each active reciever it sends a message.
+
+The collision component has a list of the game objects checks for intersections then sends a message to that game object that it has been hit
+
