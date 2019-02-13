@@ -71,8 +71,6 @@ void AvancezLib::drawLine(int sX, int sY, int eX, int eY){
 }
 
 void AvancezLib::drawCircle(int x, int y, int r){
-    int beginX = x - r;
-    int beginY = y - r;
     SDL_RenderClear(renderer);
     filledCircleRGBA(renderer, x, y, r, 0, 0, 0, 255);
 }
