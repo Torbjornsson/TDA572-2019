@@ -20,6 +20,8 @@ class Game : public GameObject
 	//Aliens
 	ObjectPool<Bomb> bomb_pool;
 
+	ObjectPool<Alien> alien_pool;
+
 	Alien * alien;
 
 	//Sprite * alien_sprite;
