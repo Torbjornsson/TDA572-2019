@@ -13,9 +13,11 @@ class Game : public GameObject
 	Player * player;
 
 	Sprite * life_sprite;
-	bool game_over;
+	bool game_over, level_win;
 
 	unsigned int score = 0;
+
+	int aliens_left = 32;
 
 	//Aliens
 	ObjectPool<Bomb> bomb_pool;
@@ -51,37 +53,11 @@ public:
 		game_objects.insert(player);
 
 		//ALIENS
-		/*
-		alien = new Alien();
-		AlienBehaviourComponent * alien_behaviour = new AlienBehaviourComponent();
-		alien_behaviour->Create(engine, alien, &game_objects, &bomb_pool);
-		RenderComponent * alien_render = new RenderComponent();
-		alien_render->Create(engine, alien, &game_objects, "data/enemy_0.bmp");
-		CollideComponent * alien_collide = new CollideComponent();
-		alien_collide->Create(engine, alien, &game_objects, (ObjectPool<GameObject>*)&rockets_pool);
-
-		alien->Create();
-		alien->AddComponent(alien_behaviour);
-		alien->AddComponent(alien_render);
-		alien->AddComponent(alien_collide);
-		alien->AddReceiver(this);
-		game_objects.insert(alien);
-		*/
-		double x = 0;
-		double y = 100;
 		alien_pool.Create(32);
 		for (auto alien = alien_pool.pool.begin(); alien != alien_pool.pool.end(); alien++){
 			*alien = new Alien();
 			AlienBehaviourComponent * behaviour = new AlienBehaviourComponent();
 			behaviour->Create(engine, *alien, &game_objects, &bomb_pool);
-
-			//grid
-			behaviour->Init(x, y);
-			x += 32;
-			if (x > 32*7){
-				x = 0;
-				y += 32;
-			}
 
 			RenderComponent * render = new RenderComponent();
 			render->Create(engine, *alien, &game_objects, "data/enemy_0.bmp");
@@ -95,6 +71,7 @@ public:
 			(*alien)->AddReceiver(this);
 			game_objects.insert(*alien);
 		}
+
 		//ROCKETS
 		rockets_pool.Create(30);
 		for (auto rocket = rockets_pool.pool.begin(); rocket != rockets_pool.pool.end(); rocket++)
@@ -128,13 +105,21 @@ public:
 
 	virtual void Init()
 	{
+		double x = 0;
+		double y = 100;
 		player->Init();
 		for(auto alien = alien_pool.pool.begin(); alien != alien_pool.pool.end(); alien++){
-			(*alien)->Init();
+			(*alien)->Init(x, y);
+			x += 32;
+			if (x > 32*7){
+				x = 0;
+				y += 32;
+			}
 		}
 
 		enabled = true;
 		game_over = false;
+		level_win = false;
 	}
 
 	virtual void Update(float dt)
@@ -147,6 +132,10 @@ public:
 			engine->quit();
 		}
 		
+		if(isLevelWin()){
+			newLevel();
+		}
+
 		if (IsGameOver())
 			dt = 0.f;
 		
@@ -181,10 +170,39 @@ public:
 		if (m == GAME_OVER)
 			game_over = true;
 
-		if (m == ALIEN_HIT)
+		if (m == ALIEN_HIT){
 			score += POINTS_PER_ALIEN * game_speed;
+			aliens_left--;
+		}
+
+		if (m == LEVEL_WIN && aliens_left < 1){
+			level_win = true;
+			SDL_Log("Level_Win!!");
+		}
 	}
 
+	void newLevel(){
+		double x = 0;
+		double y = 100;
+		for(auto alien = alien_pool.pool.begin(); alien != alien_pool.pool.end(); alien++){
+			(*alien)->Init(x, y);
+			x += 32;
+			if (x > 32*7){
+				x = 0;
+				y += 32;
+			}
+		}
+		aliens_left = 32;
+		game_speed *= 1.2;
+
+		enabled = true;
+		game_over = false;
+		level_win = false;
+	}
+
+	bool isLevelWin(){
+		return level_win;
+	}
 
 	bool IsGameOver()
 	{
