@@ -16,8 +16,15 @@
     - [ ] Your missiles
     - [ ] Enemy weapons
   - [ ] Components
+    - [ ] Render
+    - [ ] Collision
+    - [ ] Input
+      - [ ] Player
+      - [ ] Enemy
 ** Controls
    The player controls a cursor to aim the missiles, three buttons are used for sending missiles from each of the silos.
+** Components
+   Player, enemies, collission, render,
 
 ** Game loop
    Object pool for missiles, missiles have a target location, starting location and a velocity. When the missile reaches it's target location it explodes.
@@ -35,3 +42,6 @@
   Extra game features that is nice but not needed for the demo
   - [ ] Leaderboard
   - [ ] Nicer sprites
+    - [ ] cursor
+    - [ ] missile
+    - [ ] town
