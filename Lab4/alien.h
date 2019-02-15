@@ -32,7 +32,7 @@ class AlienBehaviourComponent : public Component {
             }
 
             Move(dt * game_speed * ALIEN_SPEED * direction);
-
+            
             if (rand() % 10000 < 10){
                 Bomb * bomb = bomb_pool->FirstAvailable();
                 if (bomb != NULL) {
@@ -68,7 +68,7 @@ class Alien : public GameObject {
             GameObject::Init();
         }
 
-        virtual void Recieve(Message m){
+        virtual void Receive(Message m){
             if (!enabled)
                 return;
                 
