@@ -13,9 +13,9 @@ class AlienBehaviourComponent : public Component {
             this->bomb_pool = bomb_pool;
         }
         
-        virtual void Init(){
-            go->horizontalPosition = 100;
-            go->verticalPosition = 100;
+        virtual void Init(double x, double y){
+            go->horizontalPosition = x;
+            go->verticalPosition = y;
 
             time_fire = -10000.f;
         }

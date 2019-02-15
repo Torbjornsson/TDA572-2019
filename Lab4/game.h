@@ -22,7 +22,7 @@ class Game : public GameObject
 
 	ObjectPool<Alien> alien_pool;
 
-	Alien * alien;
+	//Alien * alien;
 
 	//Sprite * alien_sprite;
 
@@ -51,6 +51,7 @@ public:
 		game_objects.insert(player);
 
 		//ALIENS
+		/*
 		alien = new Alien();
 		AlienBehaviourComponent * alien_behaviour = new AlienBehaviourComponent();
 		alien_behaviour->Create(engine, alien, &game_objects, &bomb_pool);
@@ -65,7 +66,35 @@ public:
 		alien->AddComponent(alien_collide);
 		alien->AddReceiver(this);
 		game_objects.insert(alien);
+		*/
+		double x = 0;
+		double y = 100;
+		alien_pool.Create(32);
+		for (auto alien = alien_pool.pool.begin(); alien != alien_pool.pool.end(); alien++){
+			*alien = new Alien();
+			AlienBehaviourComponent * behaviour = new AlienBehaviourComponent();
+			behaviour->Create(engine, *alien, &game_objects, &bomb_pool);
 
+			//grid
+			behaviour->Init(x, y);
+			x += 32;
+			if (x > 32*7){
+				x = 0;
+				y += 32;
+			}
+
+			RenderComponent * render = new RenderComponent();
+			render->Create(engine, *alien, &game_objects, "data/enemy_0.bmp");
+			CollideComponent * collide = new CollideComponent();
+			collide->Create(engine, *alien, &game_objects, (ObjectPool<GameObject>*) &rockets_pool);
+
+			(*alien)->Create();
+			(*alien)->AddComponent(behaviour);
+			(*alien)->AddComponent(render);
+			(*alien)->AddComponent(collide);
+			(*alien)->AddReceiver(this);
+			game_objects.insert(*alien);
+		}
 		//ROCKETS
 		rockets_pool.Create(30);
 		for (auto rocket = rockets_pool.pool.begin(); rocket != rockets_pool.pool.end(); rocket++)
@@ -100,7 +129,9 @@ public:
 	virtual void Init()
 	{
 		player->Init();
-		alien->Init();
+		for(auto alien = alien_pool.pool.begin(); alien != alien_pool.pool.end(); alien++){
+			(*alien)->Init();
+		}
 
 		enabled = true;
 		game_over = false;
