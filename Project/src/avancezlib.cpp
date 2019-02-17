@@ -46,11 +46,14 @@ bool AvancezLib::init(int width, int height){
     SDL_SetRenderDrawColor(renderer, 0xFF, 0xFF, 0xFF, 0xFF);
     SDL_RenderClear(renderer);
 
+    SDL_Log("AvancezLib::Init")
+
     return true;
 }
 
 void AvancezLib::destroy(){
-    
+    SDL_Log("AvancezLib::Destroy");
+
     //Cleanup everything
     SDL_DestroyRenderer(renderer);
     SDL_DestroyWindow(window);
@@ -61,6 +64,58 @@ void AvancezLib::destroy(){
     SDL_Quit();
 }
 
+void AvancezLib::quit(){
+    destroy();
+    exit(0);
+}
+
+void AvancezLib::processInput(){
+    SDL_Event event;
+
+    while (SDL_PollEvent(&event)){
+        if (event.type == SDL_KEYDOWN){
+            switch (event.key.keysym.sym){
+                case SDLK_ESCAPE:
+                case SDLK_q:
+                    key.esc = true;
+                    break;
+                case SDLK_1:
+                    key.1 = true;
+                    break;
+                case SDLK_2:
+                    key.2 = true;
+                    break;
+                case SDLK_3:
+                    key.3 = true;
+                    break;
+            }
+        }
+
+        if (event.type == SDL_KEYUP){
+            switch (event.key.keysym.sym){
+                case SDLK_1:
+                    key.1 = false;
+                    break;
+                case SDLK_2:
+                    key.2 = false;
+                    break;
+                case SDLK_3:
+                    key.3 = false;
+                    break;
+            }
+        }
+    }
+}
+
+void AvancezLib::swapBuffers(){
+    //Update screen
+    SDL_RenderPresent(renderer);
+}
+
+void AvancezLib::clearWindow(){
+    //Clear screen
+    SDL_RenderClear(renderer);
+}
 void AvancezLib::setColor(int r, int g, int b, int a){
     SDL_SetRenderDrawColor(renderer, r, g, b, a);
 }

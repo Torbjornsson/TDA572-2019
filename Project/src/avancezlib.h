@@ -37,6 +37,12 @@ public:
 	// If update returns false, the application should terminate.
 	bool update();
 
+	void provessInput();
+
+	void swapBuffers();
+
+	void clearWindow();
+
 	// Create a sprite given a string.
 	// All sprites are 32*32 pixels.
 	Sprite* createSprite(const char* name);
@@ -69,7 +75,7 @@ private:
 	SDL_Window * window;
 	SDL_Renderer * renderer;
 
-	TTF_Font* font;   //Uncomment when you get to Task 2
+	TTF_Font* font;
 
 	KeyStatus key;
 };
