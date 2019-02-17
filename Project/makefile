@@ -23,5 +23,4 @@ dirs:
 	mkdir $(OUT_DIR)
 	mkdir $(OBJ_DIR)
 clean: 
-	rm main.out $(OBJS)
-	rm -rf $(OUT)
+	rm $(OUT_DIR)main.out $(OBJS)
