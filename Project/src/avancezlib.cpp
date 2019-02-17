@@ -46,7 +46,7 @@ bool AvancezLib::init(int width, int height){
     SDL_SetRenderDrawColor(renderer, 0xFF, 0xFF, 0xFF, 0xFF);
     SDL_RenderClear(renderer);
 
-    SDL_Log("AvancezLib::Init")
+    SDL_Log("AvancezLib::Init");
 
     return true;
 }
@@ -80,13 +80,13 @@ void AvancezLib::processInput(){
                     key.esc = true;
                     break;
                 case SDLK_1:
-                    key.1 = true;
+                    key.fire1 = true;
                     break;
                 case SDLK_2:
-                    key.2 = true;
+                    key.fire2 = true;
                     break;
                 case SDLK_3:
-                    key.3 = true;
+                    key.fire3 = true;
                     break;
             }
         }
@@ -94,13 +94,13 @@ void AvancezLib::processInput(){
         if (event.type == SDL_KEYUP){
             switch (event.key.keysym.sym){
                 case SDLK_1:
-                    key.1 = false;
+                    key.fire1 = false;
                     break;
                 case SDLK_2:
-                    key.2 = false;
+                    key.fire2 = false;
                     break;
                 case SDLK_3:
-                    key.3 = false;
+                    key.fire3 = false;
                     break;
             }
         }
@@ -137,15 +137,16 @@ void AvancezLib::drawPixel(int x, int y){
 bool AvancezLib::update(){
     
     SDL_Event event;
+    /*
     key.fire = false;
     key.left = false;
     key.right = false;
-
+*/
     while(SDL_PollEvent(&event)){
         if(event.type == SDL_QUIT){
             return false;
         }
-
+    
         if(event.type == SDL_KEYDOWN){
             switch (event.key.keysym.sym)
             {
@@ -153,15 +154,15 @@ bool AvancezLib::update(){
                 case SDLK_q:
                     return false;
                     break;
-                case SDLK_SPACE:
-                    return key.fire = true;
-                    break;
-                case SDLK_LEFT:
-                    return key.left = true;
-                    break;
-                case SDLK_RIGHT:
-                    return key.right = true;
-                    break;
+                // case SDLK_SPACE:
+                //     return key.fire = true;
+                //     break;
+                // case SDLK_LEFT:
+                //     return key.left = true;
+                //     break;
+                // case SDLK_RIGHT:
+                //     return key.right = true;
+                //     break;
                 default:
                     break;
             }
@@ -206,9 +207,9 @@ void AvancezLib::drawText(int x, int y, const char* msg){
 }
 
 void AvancezLib::getKeyStatus(KeyStatus & keys){
-    keys.fire = key.fire;
-    keys.left = key.left;
-    keys.right = key.right;
+    keys.fire1 = key.fire1;
+    keys.fire2 = key.fire2;
+    keys.fire3 = key.fire3;
 }
 
 Sprite * AvancezLib::createSprite(const char * name){

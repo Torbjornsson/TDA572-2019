@@ -29,6 +29,9 @@ public:
 	// Destroys the avancez library instance
 	void destroy();
 
+	// Destroys the avancez library instance and exits
+	void quit();
+
 	// Creates the main window. Returns true on success.
 	bool init(int width, int height);
 
@@ -37,7 +40,7 @@ public:
 	// If update returns false, the application should terminate.
 	bool update();
 
-	void provessInput();
+	void processInput();
 
 	void swapBuffers();
 
@@ -63,9 +66,10 @@ public:
 
 	struct KeyStatus
 	{
-		bool fire; // space
-		bool left; // left arrow
-		bool right; // right arrow
+		bool fire1; // fire left silp
+		bool fire2; // fire middle silo
+		bool fire3; // fire right silo
+		bool esc;	// quit game
 	};
 
 	// Returns the keyboard status. If a flag is set, the corresponding key is being held down.

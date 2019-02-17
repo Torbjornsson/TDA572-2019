@@ -59,6 +59,6 @@ class Game : public GameObject{
     }
 
     virtual void destroy(){
-        
+
     }
-}
+};
