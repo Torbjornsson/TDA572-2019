@@ -3,11 +3,12 @@
 #include <set>
 
 #include "avancezlib.h"
+/*
 #include "Object_pool.h"
 #include "Component.h"
 #include "GameObject.h"
 #include "game.h"
-
+*/
 int main(int argc, char* argv[]){
     //Window size
     const static int width = 640, height = 480;
@@ -39,7 +40,7 @@ int main(int argc, char* argv[]){
         AvancezLib::KeyStatus key;
 		engine.getKeyStatus(key);
 
-		if (key.fire){
+		if (key.fire1){
 		    engine.drawLine(width/2, height, x, y);
             tx = x;
             ty = y;
