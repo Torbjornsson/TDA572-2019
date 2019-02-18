@@ -22,7 +22,7 @@
 # Missile command<a id="orgheadline1"></a>
 
 A clone of the classic arcade game [Missile Command](https://en.wikipedia.org/wiki/Missile_Command) where you need to protect yourself against the enemies nuclear missiles.
-![img](./Project/Missile_Command_flyer.jpg)
+![img](../Project/Missile_Command_flyer.jpg)
 
 # Game features <code>[0/8]</code><a id="orgheadline9"></a>
 
