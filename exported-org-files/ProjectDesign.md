@@ -86,3 +86,4 @@ Extra game features that is nice but not needed for the demo
     -   [ ] cursor
     -   [ ] missile
     -   [ ] town
+-   [ ] Sound

@@ -1,6 +1,6 @@
 * Missile command
   A clone of the classic arcade game [[https://en.wikipedia.org/wiki/Missile_Command][Missile Command]] where you need to protect yourself against the enemies nuclear missiles.
-  [[./Project/Missile_Command_flyer.jpg]]
+  [[../Project/Missile_Command_flyer.jpg]]
 * Game features [0/8]
   A list of the features in the game making the development easier
   - [ ] Controls
@@ -46,4 +46,5 @@
     - [ ] cursor
     - [ ] missile
     - [ ] town
+  - [ ] Sound
 
