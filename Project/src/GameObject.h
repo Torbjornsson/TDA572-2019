@@ -11,6 +11,7 @@ class GameObject{
     public:
         double horizontalPos;
         double verticalPos;
+        double radius;
 
         bool enabled;
 

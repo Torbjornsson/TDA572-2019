@@ -42,5 +42,5 @@ bool boxCollide(GameObject * go, GameObject * coll_go){
 bool circleCollide(GameObject * go, GameObject * coll_go){
     double x_diff = go->horizontalPos - coll_go->horizontalPos;
     double y_diff = go->verticalPos - coll_go->verticalPos;
-    return (std::sqrt(x_diff * x_diff + y_diff * y_diff));
+    return (std::sqrt(x_diff * x_diff + y_diff * y_diff) <= go->radius);
 }
