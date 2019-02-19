@@ -7,6 +7,8 @@ LDLIBS = -lSDL2 -lSDL2main -lSDL2_ttf -lSDL2_gfx
 SRC_DIR = src/
 OBJ_DIR = obj/
 OUT_DIR = bin/
+
+###add .cpp files and .o files here 
 SRCS = $(SRC_DIR)main.cpp $(SRC_DIR)avancezlib.cpp
 OBJS = $(OBJ_DIR)main.o $(OBJ_DIR)avancezlib.o
 
