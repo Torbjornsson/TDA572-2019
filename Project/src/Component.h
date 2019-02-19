@@ -36,7 +36,7 @@ public:
 	virtual void Update(float dt);
 	virtual void Destroy();
 
-	Sprite * GetSprite() { return sprite; }
+	Sprite * GetSprite() { }
 };
 
 
