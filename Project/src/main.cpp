@@ -68,7 +68,7 @@ int main(int argc, char* argv[]){
 		engine.drawText(0, 0, msg);
 		
 
-		engine.processInput();
+		
 		//Sleep to keep fps
 		//SDL_Delay(std::max((MS_Frame - (engine.getElapsedTime() - lastTime)), 0));	
 
@@ -79,9 +79,13 @@ int main(int argc, char* argv[]){
 		//To calculate average FPS
 		num_frames++;	
 		sum_delta += deltaTime;
+		engine.processInput();
+		game.Update(deltaTime/1000);
+		game.Draw();
     }
 
     //cleanup
+	game.destroy();
     engine.destroy();
     return 0;
 }

@@ -37,20 +37,44 @@ class Game : public GameObject{
     }
 
     virtual void Init(){
+        player->Init();
+
         enabled = true;
         game_over = false;
         level_win = false;
     }
 
     virtual void Update(float dt){
+        AvancezLib::KeyStatus keys;
+        engine->getKeyStatus(keys);
 
+        if (keys.esc){
+            destroy();
+            engine->quit();
+        }
+
+        if (isLevelWin()){
+            SDL_Log("Win");
+        }
+
+        if (isGameOver()){
+            dt = 0.f;
+        }
+
+        for (auto go = game_objects.begin(); go != game_objects.end(); go++){
+            (*go)->Update(dt);
+        }
     }
 
     virtual void Draw(){
 
+        engine->swapBuffers();
+        engine->clearWindow();
+
     }
 
     virtual void Receive(Message m){
+
 
     }
 
@@ -71,6 +95,14 @@ class Game : public GameObject{
     }
 
     virtual void destroy(){
+        SDL_Log("Game::Destroy");
+
+        for (auto go = game_objects.begin(); go != game_objects.end(); go++){
+            (*go)->Destroy();
+        }
+
+        rockets_pool.Destroy();
+        delete player;
 
     }
 };

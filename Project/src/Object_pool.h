@@ -20,7 +20,7 @@ public:
     }
 
     void Destroy(){
-        for (auto it = pool.begin(); it != pool.end; it++){
+        for (auto it = pool.begin(); it != pool.end(); it++){
             (*it)->Destroy();
         }
     }
