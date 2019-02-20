@@ -61,6 +61,16 @@ public:
 	virtual void Update(double dt);
 };
 
+class BoxCollideComponent : public CollideComponent
+{
+	double width;
+	double height;
+	double radius;
+
+public:
+	virtual void Create(AvancezLib* engine, GameObject * go, std::set<GameObject*> * game_objects, ObjectPool<GameObject> * coll_objects, double width, double height, double radius);
+	virtual void Update(double dt);
+};
 
 class RigidBodyComponent : public Component
 {

@@ -11,6 +11,9 @@ class Game : public GameObject
 
 	double ballRadius = 16;
 
+	double screen_width = 640;
+	double screen_height = 480;
+
 public:
 
 	virtual void Create(AvancezLib* engine)
@@ -28,12 +31,15 @@ public:
 			render->Create(engine, *ball, &game_objects, "data/ball.bmp");
 			CircleCollideComponent * ball_ball_collision = new CircleCollideComponent();
 			ball_ball_collision->Create(engine, *ball, &game_objects, reinterpret_cast<ObjectPool<GameObject>*>(&ball_pool), ballRadius);
+			BoxCollideComponent * ball_box_collision = new BoxCollideComponent();
+			ball_box_collision->Create(engine, *ball, &game_objects, reinterpret_cast<ObjectPool<GameObject>*>(&ball_pool), screen_width, screen_height, ballRadius);
 			RigidBodyComponent * rigidBodyComponent = new RigidBodyComponent();
 			rigidBodyComponent->Create(engine, *ball, &game_objects);
 			(*ball)->Create();
 			(*ball)->AddComponent(behaviour);
 			(*ball)->AddComponent(render);
 			(*ball)->AddComponent(ball_ball_collision);
+			(*ball)->AddComponent(ball_box_collision);
 			(*ball)->AddComponent(rigidBodyComponent);
 			game_objects.insert(*ball);
 		}

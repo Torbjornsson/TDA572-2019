@@ -109,6 +109,40 @@ void CircleCollideComponent::Update(double dt)
 	}
 }
 
+void BoxCollideComponent::Create(AvancezLib* engine, GameObject* go, std::set<GameObject*>* game_objects, ObjectPool<GameObject>* coll_objects, double width, double height, double radius){
+	Component::Create(engine, go, game_objects);
+
+	this->coll_objects = coll_objects;
+	this->width = width;
+	this->height = height;
+	this->radius = radius;
+}
+
+void BoxCollideComponent::Update(double dt){
+	for (auto i = 0; i < coll_objects->pool.size(); i++){
+		GameObject * go0 = coll_objects->pool[i];
+
+		if (go0 != go && go0->enabled){
+			BoxCollideComponent * otherCollide = go0->GetComponent<BoxCollideComponent*>();
+
+			if (otherCollide != nullptr){
+
+				bool intersection = (go0->position.x < 0) || (go0->position.y < 0) || (go0->position.x + radius * 2 > width) || (go0->position.y + radius * 2 > height);
+
+				if (intersection){
+					
+					RigidBodyComponent * rigidBodyComponent0 = go0->GetComponent<RigidBodyComponent*>();
+					if (go0->position.x < 0 || go0->position.x + radius * 2 > width )
+						rigidBodyComponent0->velocity.x *= -1;
+
+					if (go0->position.y < 0 || go0->position.y + radius * 2 > height)
+						rigidBodyComponent0->velocity.y *= -1;	
+				}
+					
+			}
+		}
+	}
+}
 
 void RigidBodyComponent::Create(AvancezLib* engine, GameObject * go, std::set<GameObject*> * game_objects)
 {
