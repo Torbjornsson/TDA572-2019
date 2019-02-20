@@ -61,5 +61,5 @@ public:
         return NULL;
     }
 
-    std::has_virtual_destructor<T*> pool;
+    std::vector<T*> pool;
 };

@@ -2,17 +2,13 @@
 #include "GameObject.h"
 #include "avancezlib.h"
 
-CollideComponent::Create(AvancezLib* engine, GameObject* go, std::set<GameObject*>* game_objects, ObjectPool<GameObject>* coll_objects){
+void CollideComponent::Create(AvancezLib* engine, GameObject* go, std::set<GameObject*>* game_objects, ObjectPool<GameObject>* coll_objects){
     Component::Create(engine, go, game_objects);
 
     this->coll_objects = coll_objects;
 }
 
-CollideComponent::Destroy(){
-    
-}
-
-CollideComponent::Update(float dt){
+void CollideComponent::Update(float dt){
     for (auto i = 0; i < coll_objects->pool.size(); i++){
         GameObject * coll_go = coll_objects->pool[i];
 
@@ -31,7 +27,7 @@ CollideComponent::Update(float dt){
 }
 
 //Check if 2 boxes overlap
-bool boxCollide(GameObject * go, GameObject * coll_go){
+bool CollideComponent::boxCollide(GameObject * go, GameObject * coll_go){
     return ((coll_go->horizontalPos > go->horizontalPos - 10) &&
         (coll_go->horizontalPos < go->horizontalPos + 10) &&
         (coll_go->verticalPos > go->verticalPos - 10) &&
@@ -39,7 +35,7 @@ bool boxCollide(GameObject * go, GameObject * coll_go){
 }
 
 //Check if point is iside the circle
-bool circleCollide(GameObject * go, GameObject * coll_go){
+bool CollideComponent::circleCollide(GameObject * go, GameObject * coll_go){
     double x_diff = go->horizontalPos - coll_go->horizontalPos;
     double y_diff = go->verticalPos - coll_go->verticalPos;
     return (std::sqrt(x_diff * x_diff + y_diff * y_diff) <= go->radius);

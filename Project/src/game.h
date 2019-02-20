@@ -31,6 +31,8 @@ class Game : public GameObject{
         player->AddReceiver(this);
         game_objects.insert(player);
 
+        rockets_pool.Create(30);
+
         score = 0;
     }
 

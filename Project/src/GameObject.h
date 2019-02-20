@@ -24,6 +24,6 @@ class GameObject{
         virtual void Update(float dt);
         virtual void Destroy();
         virtual void AddReceiver(GameObject * gameObject);
-        virtual void Receive(Message m){}
+        virtual void Receive(Message m);
         void Send(Message m);
 };

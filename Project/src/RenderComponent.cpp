@@ -2,13 +2,13 @@
 #include "GameObject.h"
 #include "avancezlib.h"
 
-RenderComponent::Create(AvancezLib* engine, GameObject* go, std::set<GameObject*> *game_objects, const char* sprite_name){
+void RenderComponent::Create(AvancezLib* engine, GameObject* go, std::set<GameObject*> *game_objects, const char* sprite_name){
     Component::Create(engine, go, game_objects);
 
     this->sprite = engine->createSprite(sprite_name);
 }
 
-RenderComponent::Update(float dt){
+void RenderComponent::Update(float dt){
     if (!go->enabled){
         return;
     }
@@ -17,13 +17,13 @@ RenderComponent::Update(float dt){
     }
 }
 
-RenderComponent::Destroy(){
+void RenderComponent::Destroy(){
     if (sprite != NULL){
         sprite->destroy();
     }
     sprite = NULL;
 }
 
-RenderComponent::GetSprite(){
+Sprite* RenderComponent::GetSprite(){
     return sprite;
 }

@@ -25,6 +25,11 @@ int main(int argc, char* argv[]){
     //Mouse
     int x, y, tx, ty;
 
+	//Start game
+	Game game;
+	game.Create(&engine);
+	game.Init();
+
     //FPS
     char msg[256];
 	int num_frames = 0;
@@ -34,6 +39,7 @@ int main(int argc, char* argv[]){
 	const static int FPS = 60;
 	const static int MS_Frame = 1000/FPS;
 	int lastTime = engine.getElapsedTime();
+
 
     //Game loop
     while(true){
@@ -64,7 +70,7 @@ int main(int argc, char* argv[]){
 
 		engine.processInput();
 		//Sleep to keep fps
-		SDL_Delay(std::max((MS_Frame - (engine.getElapsedTime() - lastTime)), 0));	
+		//SDL_Delay(std::max((MS_Frame - (engine.getElapsedTime() - lastTime)), 0));	
 
 		//Calculate time since last frame
 		deltaTime = engine.getElapsedTime() - lastTime;

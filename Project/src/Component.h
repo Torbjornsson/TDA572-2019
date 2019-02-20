@@ -1,7 +1,7 @@
 #pragma once
 
 #include <set>
-//#include "object_pool.h"
+#include "Object_pool.h"
 
 class GameObject;
 class AvancezLib;
@@ -47,5 +47,8 @@ class CollideComponent : public Component
 public:
 	virtual void Create(AvancezLib* engine, GameObject * go, std::set<GameObject*> * game_objects, ObjectPool<GameObject> * coll_objects);
 	virtual void Update(float dt);
+
+	virtual bool boxCollide(GameObject * go, GameObject * coll_go);
+	virtual bool circleCollide(GameObject * go, GameObject * coll_go);
 };
 
