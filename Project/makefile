@@ -10,7 +10,7 @@ OUT_DIR = bin/
 
 ###add .cpp files and .o files here 
 SRCS = $(SRC_DIR)main.cpp $(SRC_DIR)avancezlib.cpp $(COMPONENTS) $(SRC_DIR)GameObject.cpp
-OBJS = $(OBJ_DIR)main.o $(OBJ_DIR)avancezlib.o
+OBJS = $(OBJ_DIR)main.o $(OBJ_DIR)avancezlib.o $(OBJ_DIR)Component.o $(OBJ_DIR)RenderComponent.o $(OBJ_DIR)CollideComponent.o $(OBJ_DIR)GameObject.o
 
 COMPONENTS = $(SRC_DIR)Component.cpp $(SRC_DIR)RenderComponent.cpp $(SRC_DIR)CollideComponent.cpp
 
