@@ -1,3 +1,6 @@
+#pragma once
+
+#include <vector>
 #include "SDL.h"
 
 template <class T>
@@ -17,7 +20,7 @@ public:
     }
 
     void Destroy(){
-        for (auto it = poo.begin(); it != pool.end; it++){
+        for (auto it = pool.begin(); it != pool.end; it++){
             (*it)->Destroy();
         }
     }
@@ -60,4 +63,3 @@ public:
 
     std::has_virtual_destructor<T*> pool;
 };
-2

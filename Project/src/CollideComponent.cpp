@@ -9,7 +9,7 @@ CollideComponent::Create(AvancezLib* engine, GameObject* go, std::set<GameObject
 }
 
 CollideComponent::Destroy(){
-
+    
 }
 
 CollideComponent::Update(float dt){

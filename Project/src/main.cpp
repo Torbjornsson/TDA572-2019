@@ -3,12 +3,12 @@
 #include <set>
 
 #include "avancezlib.h"
-/*
+
 #include "Object_pool.h"
 #include "Component.h"
 #include "GameObject.h"
-#include "game.h"
-*/
+//#include "game.h"
+
 int main(int argc, char* argv[]){
     //Window size
     const static int width = 640, height = 480;

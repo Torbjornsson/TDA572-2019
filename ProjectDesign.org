@@ -16,9 +16,9 @@
   - [ ] Object pools
     - [ ] Your missiles
     - [ ] Enemy weapons
-  - [ ] Components
-    - [ ] Render
-    - [ ] Collision
+  - [-] Components
+    - [X] Render
+    - [X] Collision
     - [ ] Input
       - [ ] Player
       - [ ] Enemy

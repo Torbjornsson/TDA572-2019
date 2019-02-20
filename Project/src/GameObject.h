@@ -15,7 +15,7 @@ class GameObject{
 
         bool enabled;
 
-        ~virtual GameObject();
+        virtual ~GameObject();
 
         virtual void Create();
         virtual void AddComponent(Component * component);

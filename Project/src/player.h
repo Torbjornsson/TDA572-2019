@@ -32,4 +32,26 @@ class PlayerBehaviourComponent : public Component{
                 SDL_Log("fire3");
             }
         }
-}
+};
+
+class player : public GameObject{
+
+private:
+    /* data */
+public:
+    player(/* args */); : public GameObject
+    virtual ~player();
+
+    virtual void Init(){
+        SDL_Log("Player::Init");
+        GameObject::Init();
+    }
+
+    virtual void Receive(Message m){
+        if (m == HIT){
+            SDL_Log("Player::HIT");
+
+            
+        }
+    }
+};
