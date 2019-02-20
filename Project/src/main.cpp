@@ -7,7 +7,11 @@
 #include "Object_pool.h"
 #include "Component.h"
 #include "GameObject.h"
-//#include "game.h"
+
+#include "Rocket.h"
+#include "player.h"
+
+#include "game.h"
 
 int main(int argc, char* argv[]){
     //Window size
@@ -32,7 +36,8 @@ int main(int argc, char* argv[]){
 	int lastTime = engine.getElapsedTime();
 
     //Game loop
-    while(engine.update()){
+    while(true){
+		
         SDL_GetMouseState(&x, &y);
         engine.drawCircle(x, y, 20);
         
@@ -56,6 +61,8 @@ int main(int argc, char* argv[]){
 		sprintf(msg, "%.3f fps", avg_fps);
 		engine.drawText(0, 0, msg);
 		
+
+		engine.processInput();
 		//Sleep to keep fps
 		SDL_Delay(std::max((MS_Frame - (engine.getElapsedTime() - lastTime)), 0));	
 

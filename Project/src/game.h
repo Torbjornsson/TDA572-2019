@@ -10,9 +10,10 @@ class Game : public GameObject{
 
     unsigned int score = 0;
 
-    /*
+    
     Player * player;
-    */
+    
+    ObjectPool<Rocket> rockets_pool;
 
    public:
     virtual void Create(AvancezLib* engine){
@@ -20,6 +21,15 @@ class Game : public GameObject{
         SDL_Log("Game::Create");
 
         this->engine = engine;
+
+        player = new Player();
+        PlayerBehaviourComponent * player_behaviour = new PlayerBehaviourComponent();
+        player_behaviour->Create(engine, player, &game_objects, &rockets_pool);
+
+        player->Create();
+        player->AddComponent(player_behaviour);
+        player->AddReceiver(this);
+        game_objects.insert(player);
 
         score = 0;
     }

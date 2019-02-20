@@ -12,12 +12,12 @@ class PlayerBehaviourComponent : public Component{
         }
 
         virtual void Init(){
-            go->horizontalPosition = 0;
-            go->verticalPosition = 0;
+            go->horizontalPos = 0;
+            go->verticalPos = 0;
         }
 
         virtual void Update(float dt){
-            AvancezLib::Keystatus keys;
+            AvancezLib::KeyStatus keys;
             engine->getKeyStatus(keys);
 
             if (keys.fire1){
@@ -34,13 +34,12 @@ class PlayerBehaviourComponent : public Component{
         }
 };
 
-class player : public GameObject{
+class Player : public GameObject{
 
 private:
     /* data */
 public:
-    player(/* args */); : public GameObject
-    virtual ~player();
+    virtual ~Player() {SDL_Log("Player::~Player");}
 
     virtual void Init(){
         SDL_Log("Player::Init");
