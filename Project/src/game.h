@@ -25,9 +25,12 @@ class Game : public GameObject{
         player = new Player();
         PlayerBehaviourComponent * player_behaviour = new PlayerBehaviourComponent();
         player_behaviour->Create(engine, player, &game_objects, &rockets_pool);
+        RenderComponent * player_render = new RenderComponent();
+        player_render->Create(engine, player, &game_objects, "data/player.bmp");
 
         player->Create();
         player->AddComponent(player_behaviour);
+        player->AddComponent(player_render);
         player->AddReceiver(this);
         game_objects.insert(player);
 

@@ -2,7 +2,8 @@
 
 class PlayerBehaviourComponent : public Component{
     ObjectPool<Rocket> * rockets_pool;
-    float time_fire_pressed;
+    float time_pressed[3];
+    int x, y;
 
     public:
         virtual ~PlayerBehaviourComponent(){}
@@ -13,39 +14,47 @@ class PlayerBehaviourComponent : public Component{
         }
 
         virtual void Init(){
-            go->horizontalPos = 0;
-            go->verticalPos = 0;
+            x, y = 0;
+            go->horizontalPos = x;
+            go->verticalPos = y;
 
-            time_fire_pressed = -1000000.f;
+            for (int i = 0; i < 3; i++){
+                time_pressed[i] = -10000.f;
+            }
         }
 
         virtual void Update(float dt){
             AvancezLib::KeyStatus keys;
+            
+            SDL_GetMouseState(&x, &y);
+            go->horizontalPos = x-16;
+            go->verticalPos = y-16;
+
             engine->getKeyStatus(keys);
 
             if (keys.fire1){
-                if (CanFire())
-                    SDL_Log("1");
+                if (CanFire(0))
+                   engine->drawCircle(go->horizontalPos, go->verticalPos, 30);
             }
 
             if (keys.fire2){
-                CanFire();
+                CanFire(1);
             }
 
             if (keys.fire3){
-                CanFire();
+                CanFire(2);
             }
         }
 
-        bool CanFire()
+        bool CanFire(int n)
 	    {
 		// shoot just if enough time passed by
-		if ((engine->getElapsedTime() - time_fire_pressed) < (FIRE_TIME_INTERVAL / game_speed))
+		if ((engine->getElapsedTime() - time_pressed[n]) < (FIRE_TIME_INTERVAL / game_speed))
 			return false;
 
-		time_fire_pressed = engine->getElapsedTime();
+		time_pressed[n] = engine->getElapsedTime();
 
-		SDL_Log("fire!");
+		SDL_Log("fire! %i", n);
 		return true;
 	}
 };
