@@ -2,6 +2,7 @@
 
 class PlayerBehaviourComponent : public Component{
     ObjectPool<Rocket> * rockets_pool;
+    float time_fire_pressed;
 
     public:
         virtual ~PlayerBehaviourComponent(){}
@@ -14,6 +15,8 @@ class PlayerBehaviourComponent : public Component{
         virtual void Init(){
             go->horizontalPos = 0;
             go->verticalPos = 0;
+
+            time_fire_pressed = -1000000.f;
         }
 
         virtual void Update(float dt){
@@ -21,17 +24,30 @@ class PlayerBehaviourComponent : public Component{
             engine->getKeyStatus(keys);
 
             if (keys.fire1){
-                SDL_Log("fire1");
+                if (CanFire())
+                    SDL_Log("1");
             }
 
             if (keys.fire2){
-                SDL_Log("fire2");
+                CanFire();
             }
 
             if (keys.fire3){
-                SDL_Log("fire3");
+                CanFire();
             }
         }
+
+        bool CanFire()
+	    {
+		// shoot just if enough time passed by
+		if ((engine->getElapsedTime() - time_fire_pressed) < (FIRE_TIME_INTERVAL / game_speed))
+			return false;
+
+		time_fire_pressed = engine->getElapsedTime();
+
+		SDL_Log("fire!");
+		return true;
+	}
 };
 
 class Player : public GameObject{

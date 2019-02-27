@@ -8,6 +8,12 @@
 #include "Component.h"
 #include "GameObject.h"
 
+//Global constants and variables for controlling the game (needs to be here)
+
+const float FIRE_TIME_INTERVAL = .05f;
+
+float game_speed = 1.f;
+
 #include "Rocket.h"
 #include "player.h"
 
@@ -34,34 +40,33 @@ int main(int argc, char* argv[]){
     char msg[256];
 	int num_frames = 0;
 	float avg_fps = 0;
-	int deltaTime = 0;
-	int sum_delta = 0;
+	float deltaTime = 0;
+	float sum_delta = 0;
 	const static int FPS = 60;
-	const static int MS_Frame = 1000/FPS;
-	int lastTime = engine.getElapsedTime();
+	const static float MS_Frame = 1000/FPS;
+	float lastTime = engine.getElapsedTime();
 
 
     //Game loop
     while(true){
 		
         SDL_GetMouseState(&x, &y);
-        engine.drawCircle(x, y, 20);
         
         //Handle key events
         AvancezLib::KeyStatus key;
 		engine.getKeyStatus(key);
 
 		if (key.fire1){
-		    engine.drawLine(width/2, height, x, y);
+		    engine.drawCircle(x, y, 20);
             tx = x;
             ty = y;
         }
 
         //average FPS counter			
-		if (num_frames == 10){
-			avg_fps = (((float)num_frames * 1000) / sum_delta);
+		if (num_frames == 80){
+			avg_fps = (((float)num_frames) / sum_delta);
 			num_frames = 0;
-			sum_delta = 0;
+			sum_delta = 0.f;
 		}
 		//Set text and print
 		sprintf(msg, "%.3f fps", avg_fps);
@@ -70,17 +75,18 @@ int main(int argc, char* argv[]){
 
 		
 		//Sleep to keep fps lock to 60 fps
-		SDL_Delay(std::max((MS_Frame - (engine.getElapsedTime() - lastTime)), 0));	
+		//SDL_Delay(std::max((MS_Frame - deltaTime), 0.f));	
 
 		//Calculate time since last frame
 		deltaTime = engine.getElapsedTime() - lastTime;
 		lastTime = engine.getElapsedTime();
+		deltaTime = deltaTime * game_speed;
 
 		//To calculate average FPS
 		num_frames++;	
 		sum_delta += deltaTime;
 		engine.processInput();
-		game.Update(deltaTime/1000);
+		game.Update(deltaTime);
 		game.Draw();
     }
 

@@ -2,10 +2,11 @@
 #include <iostream>
 #include "stdio.h"
 
+
 bool AvancezLib::init(int width, int height){
 
     //Init all subsystems of SDL
-    if (SDL_Init(SDL_INIT_EVERYTHING) != 0){
+    if (SDL_Init(SDL_INIT_EVERYTHING) < 0){
         SDL_LogError(SDL_LOG_CATEGORY_APPLICATION, "SDL init failed! SDL_Error:\n", SDL_GetError());
         return false;
     }
@@ -69,6 +70,7 @@ void AvancezLib::quit(){
     exit(0);
 }
 
+bool fire1_p, fire2_p, fire3_p = false;
 void AvancezLib::processInput(){
     SDL_Event event;
 
@@ -80,13 +82,16 @@ void AvancezLib::processInput(){
                     key.esc = true;
                     break;
                 case SDLK_1:
-                    key.fire1 = true;
+                    key.fire1 = !fire1_p;
+                    fire1_p = true;
                     break;
                 case SDLK_2:
-                    key.fire2 = true;
+                    key.fire2 = !fire2_p;
+                    fire2_p = true;
                     break;
                 case SDLK_3:
-                    key.fire3 = true;
+                    key.fire3 = !fire3_p;
+                    fire3_p = true;
                     break;
             }
         }
@@ -95,12 +100,15 @@ void AvancezLib::processInput(){
             switch (event.key.keysym.sym){
                 case SDLK_1:
                     key.fire1 = false;
+                    fire1_p = false;
                     break;
                 case SDLK_2:
                     key.fire2 = false;
+                    fire2_p = false;
                     break;
                 case SDLK_3:
                     key.fire3 = false;
+                    fire3_p = false;
                     break;
             }
         }
@@ -178,8 +186,8 @@ bool AvancezLib::update(){
     return true;
 }
 
-int AvancezLib::getElapsedTime(){
-    return SDL_GetTicks();
+float AvancezLib::getElapsedTime(){
+    return SDL_GetTicks()/1000;
 }
 
 void AvancezLib::drawText(int x, int y, const char* msg){

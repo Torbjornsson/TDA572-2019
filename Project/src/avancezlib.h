@@ -54,7 +54,7 @@ public:
 	void drawText(int x, int y, const char* msg);
 
 	// Return the total time spent in the game, in seconds.
-	int getElapsedTime();
+	float getElapsedTime();
 
 	void setColor(int r, int g, int b, int a);
 
@@ -66,7 +66,7 @@ public:
 
 	struct KeyStatus
 	{
-		bool fire1; // fire left silp
+		bool fire1; // fire left silo
 		bool fire2; // fire middle silo
 		bool fire3; // fire right silo
 		bool esc;	// quit game
