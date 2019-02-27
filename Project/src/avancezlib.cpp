@@ -45,6 +45,7 @@ bool AvancezLib::init(int width, int height){
     }
 
     SDL_SetRenderDrawColor(renderer, 255, 255, 255, 0xFF);
+    SDL_ShowCursor(0);
     SDL_RenderClear(renderer);
 
     SDL_Log("AvancezLib::Init");
