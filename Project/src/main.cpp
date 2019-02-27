@@ -69,8 +69,8 @@ int main(int argc, char* argv[]){
 		
 
 		
-		//Sleep to keep fps
-		//SDL_Delay(std::max((MS_Frame - (engine.getElapsedTime() - lastTime)), 0));	
+		//Sleep to keep fps lock to 60 fps
+		SDL_Delay(std::max((MS_Frame - (engine.getElapsedTime() - lastTime)), 0));	
 
 		//Calculate time since last frame
 		deltaTime = engine.getElapsedTime() - lastTime;
