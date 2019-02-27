@@ -3,10 +3,12 @@
 #include <set>
 #include "object_pool.h"
 #include "game_object.h"
+#include "uniformgrid.h"
 
 class GameObject;
 class AvancezLib;
 class Sprite;
+class UniformGrid;
 
 
 class Component
@@ -70,6 +72,16 @@ class BoxCollideComponent : public CollideComponent
 public:
 	virtual void Create(AvancezLib* engine, GameObject * go, std::set<GameObject*> * game_objects, ObjectPool<GameObject> * coll_objects, double width, double height, double radius);
 	virtual void Update(double dt);
+};
+
+class GridCollideComponent : public Component
+{
+	UniformGrid* grid;
+	double radius;
+
+	public:
+		virtual void Create(AvancezLib* engine, GameObject * go, std::set<GameObject*> * game_objects, UniformGrid* grid, double radius);
+		virtual void Update(double dt);
 };
 
 class RigidBodyComponent : public Component

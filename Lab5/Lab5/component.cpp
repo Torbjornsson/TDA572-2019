@@ -1,6 +1,7 @@
 #include "component.h"
 #include "game_object.h"
 #include "avancezlib.h"
+#include "uniformgrid.h"
 
 void Component::Create(AvancezLib * engine, GameObject * go, std::set<GameObject*>* game_objects)
 {
@@ -71,8 +72,6 @@ void CircleCollideComponent::Update(double dt)
 {
 
 	//If we are using a uniform grid, instead query the grid. The grid should then return a number of potential ball objects that we then check for collisions with.
-
-
 	for (auto i = 0; i < coll_objects->pool.size(); i++)
 	{
 		GameObject * go0 = coll_objects->pool[i];
@@ -142,6 +141,78 @@ void BoxCollideComponent::Update(double dt){
 			}
 		}
 	}
+}
+
+void GridCollideComponent::Create(AvancezLib* engine, GameObject* go, std::set<GameObject*> * game_objects, UniformGrid* grid, double radius){
+	Component::Create(engine, go, game_objects);
+	this->grid = grid;
+	this->radius = radius;
+}
+
+void GridCollideComponent::Update(double dt){
+	int gridx, gridy;
+
+	if (go->position.x <= 0)
+		gridx = 0;
+
+	else
+		gridx = floor(go->position.x / 32);
+
+	if (go->position.y <= 0)
+		gridy = 0;
+
+	else
+		gridy = floor(go->position.y / 32) * 20;
+
+	//check surrounding cells
+	for (int i = -1; i < 2; i++){
+		for (int j = -1; j < 2; j++){
+			//check if it's at the end of the grid
+			
+			if (gridx == 0)
+				i = 0;
+			if (gridy == 0)
+				j = 0;
+
+			if (gridx == 19 && i == 1)
+				gridx = 18;
+			if (gridy == 14 * 20 && j == 1)	
+				gridy = 13 * 20;
+			
+			if (grid->grid[gridx+i + gridy+j*20]->size() > 0){
+			for (auto go0 = grid->grid[gridx+i + gridy+j*20]->begin(); go0 != grid->grid[gridx+i + gridy+j*20]->end(); go0++){
+				if ((*go0) != go && (*go0)->enabled)
+		{
+			GridCollideComponent* otherCollider = (*go0)->GetComponent<GridCollideComponent*>();
+			if (otherCollider != nullptr) { //if the other GameObject doesn't have a CircleColliderComponent we shouldn't go in here...
+
+				//Write your solution here...
+				float d_x = (*go0)->position.x - go->position.x;
+				float d_y = (*go0)->position.y - go->position.y;
+				float distanceBetweenCircleCenters = std::sqrt(d_x * d_x + d_y * d_y);											
+
+				bool intersection = distanceBetweenCircleCenters <= radius * 2;	
+				
+				if (intersection) {
+					RigidBodyComponent * rigidBodyComponent = go->GetComponent<RigidBodyComponent*>();
+					RigidBodyComponent * rigidBodyComponent0 = (*go0)->GetComponent<RigidBodyComponent*>();
+
+					Vector2D goTogo0 = (*go0)->position - go->position;
+					Vector2D goTogo0Normalized = goTogo0 / distanceBetweenCircleCenters; 
+
+					double dotProduct = rigidBodyComponent->velocity.dotProduct(goTogo0Normalized);
+					double dotProduct0 = rigidBodyComponent0->velocity.dotProduct(goTogo0Normalized);
+
+					rigidBodyComponent->velocity = goTogo0Normalized * dotProduct0;
+					rigidBodyComponent0->velocity = rigidBodyComponent0->velocity - goTogo0Normalized * dotProduct;
+				}
+			}
+		}
+			}
+		}
+		}
+	}
+	
 }
 
 void RigidBodyComponent::Create(AvancezLib* engine, GameObject * go, std::set<GameObject*> * game_objects)
