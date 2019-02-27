@@ -43,7 +43,7 @@ bool AvancezLib::init(int width, int height){
         return false;
     }
 
-    SDL_SetRenderDrawColor(renderer, 0xFF, 0xFF, 0xFF, 0xFF);
+    SDL_SetRenderDrawColor(renderer, 255, 255, 255, 0xFF);
     SDL_RenderClear(renderer);
 
     SDL_Log("AvancezLib::Init");
@@ -114,6 +114,7 @@ void AvancezLib::swapBuffers(){
 
 void AvancezLib::clearWindow(){
     //Clear screen
+    SDL_SetRenderDrawColor(renderer, 0xFF, 0xFF, 0xFF, 0xFF);
     SDL_RenderClear(renderer);
 }
 void AvancezLib::setColor(int r, int g, int b, int a){
@@ -210,6 +211,7 @@ void AvancezLib::getKeyStatus(KeyStatus & keys){
     keys.fire1 = key.fire1;
     keys.fire2 = key.fire2;
     keys.fire3 = key.fire3;
+    keys.esc = key.esc;
 }
 
 Sprite * AvancezLib::createSprite(const char * name){

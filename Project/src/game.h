@@ -1,4 +1,4 @@
-#pragma once
+    #pragma once
 
 class Game : public GameObject{
     //the set of all game objects in the game
