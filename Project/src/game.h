@@ -10,7 +10,6 @@ class Game : public GameObject{
 
     unsigned int score = 0;
 
-    
     Player * player;
     
     ObjectPool<Rocket> rockets_pool;
@@ -70,14 +69,11 @@ class Game : public GameObject{
     }
 
     virtual void Draw(){
-
         engine->swapBuffers();
         engine->clearWindow();
-
     }
 
     virtual void Receive(Message m){
-
 
     }
 
@@ -106,6 +102,5 @@ class Game : public GameObject{
 
         rockets_pool.Destroy();
         delete player;
-
     }
 };

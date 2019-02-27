@@ -19,8 +19,8 @@
   - [-] Components
     - [X] Render
     - [X] Collision
-    - [ ] Input
-      - [ ] Player
+    - [-] Input
+      - [X] Player
       - [ ] Enemy
 ** Controls
    The player controls a cursor to aim the missiles, three buttons are used for sending missiles from each of the silos.
