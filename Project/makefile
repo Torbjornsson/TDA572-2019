@@ -7,8 +7,12 @@ LDLIBS = -lSDL2 -lSDL2main -lSDL2_ttf -lSDL2_gfx
 SRC_DIR = src/
 OBJ_DIR = obj/
 OUT_DIR = bin/
-SRCS = $(SRC_DIR)main.cpp $(SRC_DIR)avancezlib.cpp
-OBJS = $(OBJ_DIR)main.o $(OBJ_DIR)avancezlib.o
+
+###add .cpp files and .o files here 
+SRCS = $(SRC_DIR)main.cpp $(SRC_DIR)avancezlib.cpp $(COMPONENTS) $(SRC_DIR)GameObject.cpp
+OBJS = $(OBJ_DIR)main.o $(OBJ_DIR)avancezlib.o $(OBJ_DIR)Component.o $(OBJ_DIR)RenderComponent.o $(OBJ_DIR)CollideComponent.o $(OBJ_DIR)GameObject.o
+
+COMPONENTS = $(SRC_DIR)Component.cpp $(SRC_DIR)RenderComponent.cpp $(SRC_DIR)CollideComponent.cpp
 
 
 
@@ -23,5 +27,4 @@ dirs:
 	mkdir $(OUT_DIR)
 	mkdir $(OBJ_DIR)
 clean: 
-	rm main.out $(OBJS)
-	rm -rf $(OUT)
+	rm $(OUT_DIR)main.out $(OBJS)

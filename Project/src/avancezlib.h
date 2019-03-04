@@ -29,6 +29,9 @@ public:
 	// Destroys the avancez library instance
 	void destroy();
 
+	// Destroys the avancez library instance and exits
+	void quit();
+
 	// Creates the main window. Returns true on success.
 	bool init(int width, int height);
 
@@ -36,6 +39,12 @@ public:
 	// since the last update call.
 	// If update returns false, the application should terminate.
 	bool update();
+
+	void processInput();
+
+	void swapBuffers();
+
+	void clearWindow();
 
 	// Create a sprite given a string.
 	// All sprites are 32*32 pixels.
@@ -45,7 +54,7 @@ public:
 	void drawText(int x, int y, const char* msg);
 
 	// Return the total time spent in the game, in seconds.
-	int getElapsedTime();
+	float getElapsedTime();
 
 	void setColor(int r, int g, int b, int a);
 
@@ -57,9 +66,10 @@ public:
 
 	struct KeyStatus
 	{
-		bool fire; // space
-		bool left; // left arrow
-		bool right; // right arrow
+		bool fire1; // fire left silo
+		bool fire2; // fire middle silo
+		bool fire3; // fire right silo
+		bool esc;	// quit game
 	};
 
 	// Returns the keyboard status. If a flag is set, the corresponding key is being held down.
@@ -69,7 +79,7 @@ private:
 	SDL_Window * window;
 	SDL_Renderer * renderer;
 
-	TTF_Font* font;   //Uncomment when you get to Task 2
+	TTF_Font* font;
 
 	KeyStatus key;
 };

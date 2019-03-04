@@ -45,7 +45,6 @@ public:
 		}
 	}
 
-
 	// move the player left or right
 	// param move depends on the time, so the player moves always at the same speed on any computer
 	void Move(float move)

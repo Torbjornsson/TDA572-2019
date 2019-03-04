@@ -23,6 +23,8 @@
 
 A clone of the classic arcade game [Missile Command](https://en.wikipedia.org/wiki/Missile_Command) where you need to protect yourself against the enemies nuclear missiles.
 
+![img](../Project/Missile_Command_flyer.jpg)
+
 # Game features <code>[0/8]</code><a id="orgheadline9"></a>
 
 A list of the features in the game making the development easier
@@ -85,3 +87,4 @@ Extra game features that is nice but not needed for the demo
     -   [ ] cursor
     -   [ ] missile
     -   [ ] town
+-   [ ] Sound
