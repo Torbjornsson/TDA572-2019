@@ -11,6 +11,7 @@
 //Global constants and variables for controlling the game (needs to be here)
 
 const float FIRE_TIME_INTERVAL = .05f;
+const float ROCKET_SPEED = 120.f;
 
 float game_speed = 1.f;
 
@@ -38,19 +39,20 @@ int main(int argc, char* argv[]){
 
     //FPS
     char msg[256];
-	float deltaTime = 0;
+	//float deltaTime = 0;
 	float lastTime = engine.getElapsedTime();
 
 
     //Game loop
     while(true){
 		//Calculate time since last frame
-		deltaTime = engine.getElapsedTime() - lastTime;
+		float newTime = engine.getElapsedTime();
+        float dt = newTime - lastTime;
 		lastTime = engine.getElapsedTime();
-		deltaTime = deltaTime * game_speed;
+		dt = dt * game_speed;
 
 		engine.processInput();
-		game.Update(deltaTime);
+		game.Update(dt);
 		game.Draw();
     }
 

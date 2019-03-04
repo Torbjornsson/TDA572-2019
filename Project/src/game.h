@@ -34,6 +34,16 @@ class Game : public GameObject{
         game_objects.insert(player);
 
         rockets_pool.Create(30);
+        for (auto rocket = rockets_pool.pool.begin(); rocket != rockets_pool.pool.end(); rocket++){
+            RocketBehaviourComponent * behaviour = new RocketBehaviourComponent();
+            behaviour->Create(engine, *rocket, &game_objects);
+            RenderComponent * render = new RenderComponent();
+            render->Create(engine, *rocket, &game_objects, "data/player.bmp");
+
+            (*rocket)->Create();
+            (*rocket)->AddComponent(behaviour);
+            (*rocket)->AddComponent(render);
+        }
 
         score = 0;
     }

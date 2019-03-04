@@ -45,7 +45,7 @@ bool AvancezLib::init(int width, int height){
     }
 
     SDL_SetRenderDrawColor(renderer, 255, 255, 255, 0xFF);
-    SDL_ShowCursor(0);
+    //SDL_ShowCursor(0);
     SDL_RenderClear(renderer);
 
     SDL_Log("AvancezLib::Init");
@@ -137,7 +137,7 @@ void AvancezLib::drawLine(int sX, int sY, int eX, int eY){
 
 void AvancezLib::drawCircle(int x, int y, int r){
     SDL_RenderClear(renderer);
-    filledCircleRGBA(renderer, x, y, r, 0, 0, 0, 255);
+    filledCircleRGBA(renderer, x+16, y+16, r, 0, 0, 0, 255);
 }
 
 void AvancezLib::drawPixel(int x, int y){
@@ -188,7 +188,7 @@ bool AvancezLib::update(){
 }
 
 float AvancezLib::getElapsedTime(){
-    return SDL_GetTicks()/1000;
+    return SDL_GetTicks()/1000.f;
 }
 
 void AvancezLib::drawText(int x, int y, const char* msg){

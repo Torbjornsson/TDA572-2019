@@ -33,9 +33,17 @@ class PlayerBehaviourComponent : public Component{
             engine->getKeyStatus(keys);
 
             if (keys.fire1){
-                if (CanFire(0))
+                if (CanFire(0)){
+                    Rocket * rocket = rockets_pool->FirstAvailable();
+                    if (rocket != NULL){
+                        rocket->Init(go->horizontalPos);
+                        game_objects->insert(rocket);
+                    }
+
                    engine->drawCircle(go->horizontalPos, go->verticalPos, 30);
+                }
             }
+
 
             if (keys.fire2){
                 CanFire(1);

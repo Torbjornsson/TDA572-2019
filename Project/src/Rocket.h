@@ -4,7 +4,7 @@ class RocketBehaviourComponent : public Component{
     public:
         void Update(float dt){
             //make a travel speed for player missiles
-            go->verticalPos -= 10 * dt;
+            go->verticalPos -= ROCKET_SPEED * dt;
 
             //guard if missile goes out of the screen
             if (go->verticalPos < 0){
