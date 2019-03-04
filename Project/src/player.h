@@ -29,6 +29,7 @@ class PlayerBehaviourComponent : public Component{
             SDL_GetMouseState(&x, &y);
             go->horizontalPos = x-16;
             go->verticalPos = y-16;
+            Vector2D endPos(x, y);
 
             engine->getKeyStatus(keys);
 
@@ -36,7 +37,7 @@ class PlayerBehaviourComponent : public Component{
                 if (CanFire(0)){
                     Rocket * rocket = rockets_pool->FirstAvailable();
                     if (rocket != NULL){
-                        rocket->Init(go->horizontalPos);
+                        rocket->Init(16, endPos);
                         game_objects->insert(rocket);
                     }
 

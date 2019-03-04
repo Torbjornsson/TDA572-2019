@@ -2,6 +2,7 @@
 #include <iostream>
 #include <set>
 
+#include "vector2D.h"
 #include "avancezlib.h"
 
 #include "Object_pool.h"
@@ -41,7 +42,6 @@ int main(int argc, char* argv[]){
     char msg[256];
 	//float deltaTime = 0;
 	float lastTime = engine.getElapsedTime();
-
 
     //Game loop
     while(true){

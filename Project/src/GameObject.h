@@ -1,4 +1,7 @@
+#pragma once
+
 #include <vector>
+#include "vector2D.h"
 
 class Component;
 
@@ -9,6 +12,8 @@ class GameObject{
         std::vector<Component*> components;
         
     public:
+        Vector2D start_pos;
+        Vector2D end_pos;
         double horizontalPos;
         double verticalPos;
         double radius;
