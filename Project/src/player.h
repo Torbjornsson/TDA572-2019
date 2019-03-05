@@ -38,6 +38,7 @@ class PlayerBehaviourComponent : public Component{
                     Rocket * rocket = rockets_pool->FirstAvailable();
                     if (rocket != NULL){
                         rocket->Init(16, endPos);
+                        rocket->GetComponent<RigidBodyComponent*>()->velocity.x = ROCKET_SPEED;
                         game_objects->insert(rocket);
                     }
 

@@ -2,6 +2,7 @@
 
 #include <set>
 #include "Object_pool.h"
+#include "vector2D.h"
 
 class GameObject;
 class AvancezLib;
@@ -52,3 +53,12 @@ public:
 	virtual bool circleCollide(GameObject * go, GameObject * coll_go);
 };
 
+class RigidBodyComponent : public Component
+{
+public:
+	Vector2D velocity, acceleration;
+
+	virtual void Create(AvancezLib* engine, GameObject * go, std::set<GameObject*> * game_objects);
+	virtual void Update(float dt);
+};
+ 

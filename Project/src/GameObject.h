@@ -31,4 +31,17 @@ class GameObject{
         virtual void AddReceiver(GameObject * gameObject);
         virtual void Receive(Message m);
         void Send(Message m);
+
+        template<typename T>
+	    T GetComponent() {
+		for (Component * c : components) {
+			T t = dynamic_cast<T>(c);  //ugly but it works...
+			if (t != nullptr) {
+				return t;
+			}
+		}
+
+		return nullptr;
+	}
+
 };

@@ -39,10 +39,13 @@ class Game : public GameObject{
             behaviour->Create(engine, *rocket, &game_objects);
             RenderComponent * render = new RenderComponent();
             render->Create(engine, *rocket, &game_objects, "data/player.bmp");
+            RigidBodyComponent * rigidBodyComponent = new RigidBodyComponent();
+            rigidBodyComponent->Create(engine, *rocket, &game_objects);
 
             (*rocket)->Create();
             (*rocket)->AddComponent(behaviour);
             (*rocket)->AddComponent(render);
+            (*rocket)->AddComponent(rigidBodyComponent);
         }
 
         score = 0;
