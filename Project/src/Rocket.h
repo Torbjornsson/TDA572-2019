@@ -7,7 +7,7 @@ class RocketBehaviourComponent : public Component{
             //go->verticalPos -= ROCKET_SPEED * dt;
 
             float d = go->start_pos.dotProduct(go->end_pos);
-            Vector2D a = go->start_pos+Vector2D(ROCKET_SPEED * dt * d, ROCKET_SPEED * dt * d);
+            Vector2D a = go->start_pos.operator*(ROCKET_SPEED*dt*d);
             go->horizontalPos = a.x;
             go->verticalPos = a.y;
 
@@ -18,6 +18,7 @@ class RocketBehaviourComponent : public Component{
 
             if (go->verticalPos <= go->end_pos.y && go->horizontalPos == go->end_pos.x){
                 SDL_Log("explode!!");
+                go->enabled = false;
             }
         }
 };

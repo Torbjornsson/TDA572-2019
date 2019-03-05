@@ -11,7 +11,7 @@
 
 //Global constants and variables for controlling the game (needs to be here)
 
-const float FIRE_TIME_INTERVAL = .05f;
+const float FIRE_TIME_INTERVAL = .5f;
 const float ROCKET_SPEED = 120.f;
 
 float game_speed = 1.f;

@@ -49,6 +49,10 @@ bool AvancezLib::init(int width, int height){
     SDL_RenderClear(renderer);
 
     SDL_Log("AvancezLib::Init");
+    key.esc = false;
+    key.fire1 = false;
+    key.fire2 = false;
+    key.fire3 = false;
 
     return true;
 }
