@@ -11,10 +11,14 @@ class Game : public GameObject{
     unsigned int score = 0;
 
     Player * player;
+
+    Enemy * enemy;
     
     ObjectPool<Rocket> rockets_pool;
 
     ObjectPool<Explosion> explosions_pool;
+
+    ObjectPool<Missile> missiles_pool;
 
    public:
     virtual void Create(AvancezLib* engine){
@@ -34,6 +38,13 @@ class Game : public GameObject{
         player->AddComponent(player_render);
         player->AddReceiver(this);
         game_objects.insert(player);
+
+        enemy = new Enemy();
+        EnemyBehaviourComponent * enemy_behaviour = new EnemyBehaviourComponent();
+        enemy_behaviour->Create(engine, enemy, &game_objects, &missiles_pool);
+        enemy->Create();
+        enemy->AddComponent(enemy_behaviour);
+        game_objects.insert(enemy);
 
         rockets_pool.Create(30);
         for (auto rocket = rockets_pool.pool.begin(); rocket != rockets_pool.pool.end(); rocket++){
@@ -59,11 +70,24 @@ class Game : public GameObject{
             (*explosion)->AddComponent(behaviour);
         }
 
+        missiles_pool.Create(10);
+        for (auto missile = missiles_pool.pool.begin(); missile != missiles_pool.pool.end(); missile++){
+            MissileBehaviourComponent * behaviour = new MissileBehaviourComponent();
+            behaviour->Create(engine, *missile, &game_objects);
+            RigidBodyComponent * rigid = new RigidBodyComponent();
+            rigid->Create(engine, *missile, &game_objects);
+
+            (*missile)->Create();
+            (*missile)->AddComponent(behaviour);
+            (*missile)->AddComponent(rigid);
+        }
+
         score = 0;
     }
 
     virtual void Init(){
         player->Init();
+        enemy->Init();
 
         enabled = true;
         game_over = false;

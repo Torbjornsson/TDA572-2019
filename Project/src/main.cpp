@@ -21,6 +21,9 @@ float game_speed = 1.f;
 #include "Rocket.h"
 #include "player.h"
 
+#include "Missile.h"
+#include "Enemy.h"
+
 #include "game.h"
 
 int main(int argc, char* argv[]){
