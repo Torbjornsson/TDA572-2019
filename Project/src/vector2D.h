@@ -1,5 +1,7 @@
 #pragma once
 
+#include <math.h>
+
 class Vector2D {
 public:
 	double x;
@@ -33,6 +35,16 @@ public:
 	double dotProduct(const Vector2D& rhs)
 	{
 		return x * rhs.x + y * rhs.y;
+	}
+
+	double Magnitude(){
+		return sqrt(x * x + y * y);
+	}
+
+	void Normalize() {
+		double mag = Magnitude();
+		x = x / mag;
+		y = y / mag;
 	}
 
 	Vector2D(double x, double y) {

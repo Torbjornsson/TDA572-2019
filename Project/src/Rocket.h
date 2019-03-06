@@ -7,9 +7,9 @@ class RocketBehaviourComponent : public Component{
             //go->verticalPos -= ROCKET_SPEED * dt;
 
             float d = go->start_pos.dotProduct(go->end_pos);
-            Vector2D a = go->start_pos.operator+(Vector2D(ROCKET_SPEED*dt*d, ROCKET_SPEED*dt*d));
-            go->horizontalPos += a.x;
-            go->verticalPos += a.y;
+            //Vector2D a = go->start_pos.operator+(Vector2D(ROCKET_SPEED*dt*d, ROCKET_SPEED*dt*d));
+            //go->horizontalPos += a.x;
+            //go->verticalPos += a.y;
 
             //guard if missile goes out of the screen
             if (go->verticalPos < 0){
