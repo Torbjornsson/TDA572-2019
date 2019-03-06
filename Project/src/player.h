@@ -36,29 +36,27 @@ class PlayerBehaviourComponent : public Component{
             if (keys.fire1){
                 if (CanFire(0)){
                     Rocket * rocket = rockets_pool->FirstAvailable();
-                    if (rocket != NULL){
-                        rocket->Init(16, endPos);
-                        Vector2D vel = endPos.operator-(Vector2D(16, 480-52));
-                        vel.Normalize();
-                        rocket->GetComponent<RigidBodyComponent*>()->velocity = vel.operator*(ROCKET_SPEED);
-                        game_objects->insert(rocket);
-                    }
-
-                   engine->drawCircle(go->horizontalPos, go->verticalPos, 30);
+                    FireRocket(rocket, Vector2D(16, WINDOW_HEIGHT-52), endPos);
                 }
             }
 
 
             if (keys.fire2){
-                CanFire(1);
+                if (CanFire(1)){
+                    Rocket * rocket = rockets_pool->FirstAvailable();
+                    FireRocket(rocket, Vector2D(WINDOW_WIDTH/2 - 16, WINDOW_HEIGHT-52), endPos);
+                }
             }
 
             if (keys.fire3){
-                CanFire(2);
+                if (CanFire(2)){
+                    Rocket * rocket = rockets_pool->FirstAvailable();
+                    FireRocket(rocket, Vector2D(WINDOW_WIDTH-48, WINDOW_HEIGHT -52), endPos);
+                }
             }
         }
 
-        bool CanFire(int n)
+    bool CanFire(int n)
 	    {
 		// shoot just if enough time passed by
 		if ((engine->getElapsedTime() - time_pressed[n]) < (FIRE_TIME_INTERVAL / game_speed))
@@ -69,6 +67,16 @@ class PlayerBehaviourComponent : public Component{
 		SDL_Log("fire! %i", n);
 		return true;
 	}
+
+    void FireRocket(Rocket * rocket, Vector2D startPos, Vector2D endPos){
+        if (rocket != NULL){
+            rocket->Init(startPos.x, endPos);
+            Vector2D vel = endPos.operator-(startPos);
+            vel.Normalize();
+            rocket->GetComponent<RigidBodyComponent*>()->velocity = vel.operator*(ROCKET_SPEED);
+            game_objects->insert(rocket);
+        }
+    }
 };
 
 class Player : public GameObject{

@@ -13,6 +13,7 @@
 
 const float FIRE_TIME_INTERVAL = .5f;
 const float ROCKET_SPEED = 120.f;
+const static int WINDOW_WIDTH = 640, WINDOW_HEIGHT = 480;
 
 float game_speed = 1.f;
 
@@ -23,12 +24,11 @@ float game_speed = 1.f;
 
 int main(int argc, char* argv[]){
     //Window size
-    const static int width = 640, height = 480;
 
     //init engine
     AvancezLib engine;
 
-    engine.init(width, height);
+    engine.init(WINDOW_WIDTH, WINDOW_HEIGHT);
 
     //Mouse
     int x, y, tx, ty;
