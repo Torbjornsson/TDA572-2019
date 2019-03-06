@@ -1,23 +1,37 @@
 #pragma once
 
 class RocketBehaviourComponent : public Component{
+    ObjectPool<Explosion> *explosions_pool;
     public:
+        virtual ~RocketBehaviourComponent(){}
+
+        virtual void Create(AvancezLib* engine, GameObject* go, std::set<GameObject*>* game_objects, ObjectPool<Explosion>* explosions_pool){
+            Component::Create(engine, go, game_objects);
+            this->explosions_pool = explosions_pool;
+        }
         void Update(float dt){
             //make a travel speed for player missiles
             //go->verticalPos -= ROCKET_SPEED * dt;
 
-            float d = go->start_pos.dotProduct(go->end_pos);
+            //float d = go->start_pos.dotProduct(go->end_pos);
             //Vector2D a = go->start_pos.operator+(Vector2D(ROCKET_SPEED*dt*d, ROCKET_SPEED*dt*d));
             //go->horizontalPos += a.x;
             //go->verticalPos += a.y;
+
+            engine->drawLine(go->start_pos.x, go->start_pos.y, go->horizontalPos, go->verticalPos);
 
             //guard if missile goes out of the screen
             if (go->verticalPos < 0){
                 go->enabled = false;
             }
 
-            if (go->verticalPos <= go->end_pos.y && go->horizontalPos == go->end_pos.x){
+            if (go->verticalPos <= go->end_pos.y){
                 SDL_Log("explode!!");
+                Explosion * explosion = explosions_pool->FirstAvailable();
+                if (explosion != NULL){
+                    explosion->Init(go->horizontalPos, go->verticalPos, 1);
+                    game_objects->insert(explosion);
+                }
                 go->enabled = false;
             }
         }

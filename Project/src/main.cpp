@@ -17,6 +17,7 @@ const static int WINDOW_WIDTH = 640, WINDOW_HEIGHT = 480;
 
 float game_speed = 1.f;
 
+#include "Explosion.h"
 #include "Rocket.h"
 #include "player.h"
 

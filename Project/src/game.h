@@ -14,6 +14,8 @@ class Game : public GameObject{
     
     ObjectPool<Rocket> rockets_pool;
 
+    ObjectPool<Explosion> explosions_pool;
+
    public:
     virtual void Create(AvancezLib* engine){
         //MOVE THIS!!!
@@ -36,7 +38,7 @@ class Game : public GameObject{
         rockets_pool.Create(30);
         for (auto rocket = rockets_pool.pool.begin(); rocket != rockets_pool.pool.end(); rocket++){
             RocketBehaviourComponent * behaviour = new RocketBehaviourComponent();
-            behaviour->Create(engine, *rocket, &game_objects);
+            behaviour->Create(engine, *rocket, &game_objects, &explosions_pool);
             RenderComponent * render = new RenderComponent();
             render->Create(engine, *rocket, &game_objects, "data/player.bmp");
             RigidBodyComponent * rigidBodyComponent = new RigidBodyComponent();
@@ -44,8 +46,17 @@ class Game : public GameObject{
 
             (*rocket)->Create();
             (*rocket)->AddComponent(behaviour);
-            (*rocket)->AddComponent(render);
+            //(*rocket)->AddComponent(render);
             (*rocket)->AddComponent(rigidBodyComponent);
+        }
+
+        explosions_pool.Create(30);
+        for (auto explosion = explosions_pool.pool.begin(); explosion != explosions_pool.pool.end(); explosion++){
+            ExplosionBehaviourComponent * behaviour = new ExplosionBehaviourComponent();
+            behaviour->Create(engine, *explosion, &game_objects);
+
+            (*explosion)->Create();
+            (*explosion)->AddComponent(behaviour);
         }
 
         score = 0;

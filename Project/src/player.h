@@ -3,6 +3,7 @@
 class PlayerBehaviourComponent : public Component{
     ObjectPool<Rocket> * rockets_pool;
     float time_pressed[3];
+    int left_insilo[3];
     int x, y;
 
     public:
@@ -20,6 +21,7 @@ class PlayerBehaviourComponent : public Component{
 
             for (int i = 0; i < 3; i++){
                 time_pressed[i] = -10000.f;
+                left_insilo[i] = 6;
             }
         }
 
@@ -59,10 +61,14 @@ class PlayerBehaviourComponent : public Component{
     bool CanFire(int n)
 	    {
 		// shoot just if enough time passed by
+        if (left_insilo[n] == 0)
+            return false;
+
 		if ((engine->getElapsedTime() - time_pressed[n]) < (FIRE_TIME_INTERVAL / game_speed))
 			return false;
 
 		time_pressed[n] = engine->getElapsedTime();
+        left_insilo[n]--;
 
 		SDL_Log("fire! %i", n);
 		return true;
