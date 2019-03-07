@@ -3,6 +3,7 @@
 #include <SDL.h>
 #include <SDL_ttf.h>  //Uncomment when you get to Task 2
 #include <SDL2_gfxPrimitives.h>
+#include <SDL_image.h>
 
 class Sprite
 {

@@ -27,8 +27,23 @@ class EnemyBehaviourComponent : public Component{
 
         virtual void Update(float dt){
             go->horizontalPos = rand() % 640;
-            Vector2D endPos = Vector2D(WINDOW_WIDTH / 2, WINDOW_HEIGHT);
+            
             if (CanFire(0)){
+                Vector2D endPos = Vector2D(WINDOW_WIDTH - 32, WINDOW_HEIGHT);
+                switch (rand() % 3)
+                {
+                    case 0:
+                        endPos = Vector2D(32, WINDOW_HEIGHT);
+                        break;
+                    case 1:
+                        endPos = Vector2D(WINDOW_WIDTH/2, WINDOW_HEIGHT);
+                        break;
+                    case 2:
+                        endPos = Vector2D(WINDOW_WIDTH - 32, WINDOW_HEIGHT);
+                        break;
+                    default:
+                        break;
+                }
                 Missile * missile = missiles_pool->FirstAvailable();
                 FireRocket(missile, Vector2D(go->horizontalPos, go->verticalPos), endPos);
             }

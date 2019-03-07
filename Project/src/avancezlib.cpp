@@ -45,7 +45,7 @@ bool AvancezLib::init(int width, int height){
     }
 
     SDL_SetRenderDrawColor(renderer, 255, 255, 255, 0xFF);
-    //SDL_ShowCursor(0);
+    SDL_ShowCursor(0);
     SDL_RenderClear(renderer);
 
     SDL_Log("AvancezLib::Init");
@@ -230,7 +230,8 @@ void AvancezLib::getKeyStatus(KeyStatus & keys){
 
 Sprite * AvancezLib::createSprite(const char * name){
     //Create surface from picture
-    SDL_Surface* surface = SDL_LoadBMP(name);
+    
+    SDL_Surface* surface = IMG_Load(name);
     if(surface == NULL){
         SDL_LogError(SDL_LOG_CATEGORY_APPLICATION, "unable to load image", name, SDL_GetError());
         return NULL;

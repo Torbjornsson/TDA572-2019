@@ -2,7 +2,7 @@ CXX = g++
 
 CXXFLAGS = 
 LDFLAGS = -I/usr/include/SDL2
-LDLIBS = -lSDL2 -lSDL2main -lSDL2_ttf -lSDL2_gfx
+LDLIBS = -lSDL2 -lSDL2main -lSDL2_ttf -lSDL2_gfx -lSDL2_image
 
 SRC_DIR = src/
 OBJ_DIR = obj/

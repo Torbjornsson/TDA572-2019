@@ -20,6 +20,10 @@ class Game : public GameObject{
 
     ObjectPool<Missile> missiles_pool;
 
+    ObjectPool<Town> town_pool;
+
+    ObjectPool<Silo> silo_pool;
+
    public:
     virtual void Create(AvancezLib* engine){
         //MOVE THIS!!!
@@ -31,7 +35,7 @@ class Game : public GameObject{
         PlayerBehaviourComponent * player_behaviour = new PlayerBehaviourComponent();
         player_behaviour->Create(engine, player, &game_objects, &rockets_pool);
         RenderComponent * player_render = new RenderComponent();
-        player_render->Create(engine, player, &game_objects, "data/player.bmp");
+        player_render->Create(engine, player, &game_objects, "data/cursor.png");
 
         player->Create();
         player->AddComponent(player_behaviour);
@@ -82,12 +86,44 @@ class Game : public GameObject{
             (*missile)->AddComponent(rigid);
         }
 
+        town_pool.Create(6);
+        for (auto town = town_pool.pool.begin(); town != town_pool.pool.end(); town++){
+            RenderComponent * render = new RenderComponent();
+            render->Create(engine, *town, &game_objects, "data/town.png");
+
+            (*town)->Create();
+            (*town)->AddComponent(render);
+            game_objects.insert(*town);
+        }
+
+        silo_pool.Create(3);
+        for (auto silo = silo_pool.pool.begin(); silo != silo_pool.pool.end(); silo++){
+            RenderComponent * render = new RenderComponent();
+            render->Create(engine, *silo, &game_objects, "data/silo.png");
+
+            (*silo)->Create();
+            (*silo)->AddComponent(render);
+            game_objects.insert(*silo);
+        }
+
+
         score = 0;
     }
 
     virtual void Init(){
         player->Init();
         enemy->Init();
+        int i = 1;
+        for (auto town = town_pool.pool.begin(); town != town_pool.pool.end(); town++){
+            (*town)->Init((WINDOW_WIDTH/8 * i) - 32);
+            i++;
+        }
+        i = 0;
+
+        for (auto silo = silo_pool.pool.begin(); silo != silo_pool.pool.end(); silo++){
+            (*silo)->Init((WINDOW_WIDTH/2 * i) -16 *i);
+            i++;
+        }
 
         enabled = true;
         game_over = false;
