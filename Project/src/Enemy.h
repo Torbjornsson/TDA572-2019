@@ -15,7 +15,7 @@ class EnemyBehaviourComponent : public Component{
         }
 
         virtual void Init(){
-            x, y = 1;
+            x, y = 0;
             go->horizontalPos = x;
             go->verticalPos = y;
 
@@ -26,7 +26,7 @@ class EnemyBehaviourComponent : public Component{
         }
 
         virtual void Update(float dt){
-            Vector2D endPos(WINDOW_WIDTH / 2, WINDOW_HEIGHT);
+            Vector2D endPos = Vector2D(WINDOW_WIDTH / 2, WINDOW_HEIGHT);
             if (CanFire(0)){
                 Missile * missile = missiles_pool->FirstAvailable();
                 FireRocket(missile, Vector2D(go->horizontalPos, go->verticalPos), endPos);
@@ -54,7 +54,7 @@ class EnemyBehaviourComponent : public Component{
             missile->Init(startPos.x, endPos);
             Vector2D vel = endPos.operator-(startPos);
             vel.Normalize();
-            missile->GetComponent<RigidBodyComponent*>()->velocity = vel.operator*(-ROCKET_SPEED);
+            missile->GetComponent<RigidBodyComponent*>()->velocity = vel.operator*(ROCKET_SPEED);
             game_objects->insert(missile);
         }
     }

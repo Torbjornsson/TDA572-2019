@@ -16,9 +16,10 @@ class Missile : public GameObject{
     public:
         virtual void Init(double xPos, Vector2D endpos){
             SDL_Log("Missile::Init");
-            start_pos = Vector2D(xPos, 1.d);
+            GameObject::Init();
+            start_pos = Vector2D(xPos, 0);
             end_pos = endpos;
-            horizontalPos = xPos;
+            horizontalPos = 0;
             verticalPos = 0;
         }
 
