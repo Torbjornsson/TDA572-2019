@@ -3,7 +3,7 @@
 class ExplosionBehaviourComponent : public Component{
     public:
         void Update(float dt){
-            go->radius = go->radius + dt;
+            go->radius = go->radius + dt * 2;
             engine->drawCircle(go->horizontalPos, go->verticalPos, go->radius);
 
             if (go->radius >= 32){
@@ -32,7 +32,7 @@ class Explosion : public GameObject{
 
             if (m == HIT){
                 //change to a timer and expand radious
-                enabled = false;
+                //enabled = false;
                 SDL_Log("Explosion::Hit");
             }
         }

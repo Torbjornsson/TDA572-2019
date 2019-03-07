@@ -55,13 +55,13 @@ class Game : public GameObject{
             RocketBehaviourComponent * behaviour = new RocketBehaviourComponent();
             behaviour->Create(engine, *rocket, &game_objects, &explosions_pool);
             RenderComponent * render = new RenderComponent();
-            render->Create(engine, *rocket, &game_objects, "data/player.bmp");
+            render->Create(engine, *rocket, &game_objects, "data/missile.png");
             RigidBodyComponent * rigidBodyComponent = new RigidBodyComponent();
             rigidBodyComponent->Create(engine, *rocket, &game_objects);
 
             (*rocket)->Create();
             (*rocket)->AddComponent(behaviour);
-            //(*rocket)->AddComponent(render);
+            (*rocket)->AddComponent(render);
             (*rocket)->AddComponent(rigidBodyComponent);
         }
 
@@ -69,9 +69,13 @@ class Game : public GameObject{
         for (auto explosion = explosions_pool.pool.begin(); explosion != explosions_pool.pool.end(); explosion++){
             ExplosionBehaviourComponent * behaviour = new ExplosionBehaviourComponent();
             behaviour->Create(engine, *explosion, &game_objects);
+            //CollideComponent * collide = new CollideComponent();
+            //collide->Create(engine, *explosion, &game_objects, (ObjectPool<GameObject>*) &missiles_pool);
 
             (*explosion)->Create();
             (*explosion)->AddComponent(behaviour);
+            //(*explosion)->AddComponent(collide);
+            (*explosion)->AddReceiver(this);
         }
 
         missiles_pool.Create(10);
@@ -80,10 +84,14 @@ class Game : public GameObject{
             behaviour->Create(engine, *missile, &game_objects);
             RigidBodyComponent * rigid = new RigidBodyComponent();
             rigid->Create(engine, *missile, &game_objects);
+            CollideComponent * collide = new CollideComponent();
+            collide->Create(engine, *missile, &game_objects, (ObjectPool<GameObject>*) &explosions_pool);
 
             (*missile)->Create();
             (*missile)->AddComponent(behaviour);
             (*missile)->AddComponent(rigid);
+            (*missile)->AddComponent(collide);
+            (*missile)->AddReceiver(this);
         }
 
         town_pool.Create(6);
@@ -100,9 +108,13 @@ class Game : public GameObject{
         for (auto silo = silo_pool.pool.begin(); silo != silo_pool.pool.end(); silo++){
             RenderComponent * render = new RenderComponent();
             render->Create(engine, *silo, &game_objects, "data/silo.png");
+            CollideComponent * collide = new CollideComponent();
+            collide->Create(engine, *silo, &game_objects, (ObjectPool<GameObject>*) &missiles_pool);
 
             (*silo)->Create();
             (*silo)->AddComponent(render);
+            (*silo)->AddComponent(collide);
+            (*silo)->AddReceiver(this);
             game_objects.insert(*silo);
         }
 

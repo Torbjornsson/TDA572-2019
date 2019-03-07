@@ -21,7 +21,7 @@ class EnemyBehaviourComponent : public Component{
 
             for (int i = 0; i < 3; i++){
                 time_pressed[i] = -10000.f;
-                left_insilo[i] = 6;
+                left_insilo[i] = 99;
             }
         }
 
