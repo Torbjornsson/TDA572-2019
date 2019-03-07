@@ -5,7 +5,6 @@ class MissileBehaviourComponent : public Component{
         void Update(float dt){
 
             engine->drawLine(go->start_pos.x, go->start_pos.y, go->horizontalPos, go->verticalPos);
-            SDL_Log("test");
 
             if (go->verticalPos >= WINDOW_HEIGHT)
                 go->enabled = false;
@@ -19,7 +18,7 @@ class Missile : public GameObject{
             GameObject::Init();
             start_pos = Vector2D(xPos, 0);
             end_pos = endpos;
-            horizontalPos = 0;
+            horizontalPos = xPos;
             verticalPos = 0;
         }
 
