@@ -5,15 +5,16 @@ class Silo : public GameObject{
         virtual void Init(double xPos){
             GameObject::Init();
             horizontalPos = xPos;
-            verticalPos = WINDOW_HEIGHT - 48;
+            verticalPos = WINDOW_HEIGHT - 32;
             radius = 16;
         }
 
-        virtual void Recieve(Message m){
+        virtual void Receive(Message m){
             if (!enabled)
                 return;
 
             if (m == HIT){
+                SDL_Log("SILO::HIT");
                 enabled = false;
             }
         }

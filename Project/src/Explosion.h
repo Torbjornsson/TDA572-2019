@@ -31,7 +31,7 @@ class Explosion : public GameObject{
             }
 
             if (m == HIT){
-                //change to a timer and expand radious
+                //change to a timer and expand radius
                 //enabled = false;
                 SDL_Log("Explosion::Hit");
             }

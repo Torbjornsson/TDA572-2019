@@ -105,10 +105,13 @@ class Game : public GameObject{
             render->Create(engine, *town, &game_objects, "data/town.png");
             CollideComponent * collide = new CollideComponent();
             collide->Create(engine, *town, &game_objects, (ObjectPool<GameObject>*) &missiles_pool);
+            TownBehaviourComponent * behaviour = new TownBehaviourComponent();
+            behaviour->Create(engine, *town, &game_objects);
 
             (*town)->Create();
             (*town)->AddComponent(render);
             (*town)->AddComponent(collide);
+            (*town)->AddComponent(behaviour);
             (*town)->AddReceiver(this);
             game_objects.insert(*town);
         }
@@ -119,10 +122,13 @@ class Game : public GameObject{
             render->Create(engine, *silo, &game_objects, "data/silo.png");
             CollideComponent * collide = new CollideComponent();
             collide->Create(engine, *silo, &game_objects, (ObjectPool<GameObject>*) &missiles_pool);
+            TownBehaviourComponent * behaviour = new TownBehaviourComponent();
+            behaviour->Create(engine, *silo, &game_objects);
 
             (*silo)->Create();
             (*silo)->AddComponent(render);
             (*silo)->AddComponent(collide);
+            (*silo)->AddComponent(behaviour);
             (*silo)->AddReceiver(this);
             game_objects.insert(*silo);
         }

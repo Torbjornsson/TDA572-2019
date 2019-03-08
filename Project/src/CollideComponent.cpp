@@ -13,13 +13,10 @@ void CollideComponent::Update(float dt){
         GameObject * coll_go = coll_objects->pool[i];
 
         if (coll_go->enabled){
-            if (boxCollide(go, coll_go)){
-                coll_go->Receive(HIT);
-                go->Receive(HIT);
-            }
             if (circleCollide(go, coll_go)){
-                coll_go->Receive(HIT);
                 go->Receive(HIT);
+                coll_go->Receive(HIT);
+                
             }
         }
     }

@@ -1,5 +1,12 @@
 #pragma once
 
+class TownBehaviourComponent : public Component{
+    public:
+        void Update(float dt){
+
+        }
+};
+
 class Town : public GameObject{
     public:
         virtual void Init(double xPos){
@@ -10,7 +17,7 @@ class Town : public GameObject{
             radius = 16;
         }
 
-        virtual void Recieve(Message m){
+        virtual void Receive(Message m){
             if (!enabled)
                 return;
 

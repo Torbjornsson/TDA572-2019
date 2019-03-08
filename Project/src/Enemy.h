@@ -28,17 +28,17 @@ class EnemyBehaviourComponent : public Component{
         virtual void Update(float dt){
             go->horizontalPos = rand() % 640;
             if (CanFire(0)){    
-                Vector2D endPos = Vector2D(WINDOW_WIDTH - 32, WINDOW_HEIGHT);
+                Vector2D endPos = Vector2D(WINDOW_WIDTH - 16, WINDOW_HEIGHT-32);
                 switch (rand() % 3)
                 {
                     case 0:
-                        endPos = Vector2D(32, WINDOW_HEIGHT);
+                        endPos = Vector2D(16, WINDOW_HEIGHT - 32);
                         break;
                     case 1:
-                        endPos = Vector2D(WINDOW_WIDTH/2, WINDOW_HEIGHT);
+                        endPos = Vector2D(WINDOW_WIDTH/2, WINDOW_HEIGHT -32);
                         break;
                     case 2:
-                        endPos = Vector2D(WINDOW_WIDTH - 32, WINDOW_HEIGHT);
+                        endPos = Vector2D(WINDOW_WIDTH - 16, WINDOW_HEIGHT -32);
                         break;
                     default:
                         break;

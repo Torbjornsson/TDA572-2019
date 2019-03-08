@@ -142,7 +142,7 @@ void AvancezLib::drawLine(int sX, int sY, int eX, int eY){
 void AvancezLib::drawCircle(int x, int y, int r){
     //SDL_RenderClear(renderer);
     SDL_SetRenderDrawColor(renderer, 0, 0, 0, 0xFF);
-    filledCircleRGBA(renderer, x+16, y+16, r, 0, 0, 0, 255);
+    filledCircleRGBA(renderer, x, y, r, 0, 0, 0, 255);
 }
 
 void AvancezLib::drawPixel(int x, int y){
