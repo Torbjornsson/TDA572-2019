@@ -3,7 +3,7 @@
 class ExplosionBehaviourComponent : public Component{
     public:
         void Update(float dt){
-            go->radius = go->radius + dt * 2;
+            go->radius = go->radius + dt * 4;
             engine->drawCircle(go->horizontalPos, go->verticalPos, go->radius);
 
             if (go->radius >= 32){

@@ -57,6 +57,10 @@ class PlayerBehaviourComponent : public Component{
                 }
             }
         }
+        
+        virtual int GetLeftInSilo(int n){
+            return left_insilo[n];
+        }
 
     bool CanFire(int n)
 	    {
@@ -79,7 +83,7 @@ class PlayerBehaviourComponent : public Component{
             rocket->Init(startPos.x, endPos);
             Vector2D vel = endPos.operator-(startPos);
             vel.Normalize();
-            rocket->GetComponent<RigidBodyComponent*>()->velocity = vel.operator*(ROCKET_SPEED);
+            rocket->GetComponent<RigidBodyComponent*>()->velocity = vel.operator*(ROCKET_SPEED*4);
             game_objects->insert(rocket);
         }
     }

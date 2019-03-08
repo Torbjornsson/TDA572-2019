@@ -10,6 +10,8 @@ class Game : public GameObject{
 
     unsigned int score = 0;
 
+    Sprite * missile_sprite;
+
     Player * player;
 
     Enemy * enemy;
@@ -54,14 +56,14 @@ class Game : public GameObject{
         for (auto rocket = rockets_pool.pool.begin(); rocket != rockets_pool.pool.end(); rocket++){
             RocketBehaviourComponent * behaviour = new RocketBehaviourComponent();
             behaviour->Create(engine, *rocket, &game_objects, &explosions_pool);
-            RenderComponent * render = new RenderComponent();
-            render->Create(engine, *rocket, &game_objects, "data/missile.png");
+            //RenderComponent * render = new RenderComponent();
+            //render->Create(engine, *rocket, &game_objects, "data/missile.png");
             RigidBodyComponent * rigidBodyComponent = new RigidBodyComponent();
             rigidBodyComponent->Create(engine, *rocket, &game_objects);
 
             (*rocket)->Create();
             (*rocket)->AddComponent(behaviour);
-            (*rocket)->AddComponent(render);
+            //(*rocket)->AddComponent(render);
             (*rocket)->AddComponent(rigidBodyComponent);
         }
 
@@ -118,22 +120,23 @@ class Game : public GameObject{
             game_objects.insert(*silo);
         }
 
-
+        missile_sprite = engine->createSprite("data/missile.png");
         score = 0;
     }
 
     virtual void Init(){
         player->Init();
         enemy->Init();
-        int i = 1;
-        for (auto town = town_pool.pool.begin(); town != town_pool.pool.end(); town++){
-            (*town)->Init((WINDOW_WIDTH/8 * i) - 32);
-            i++;
-        }
-        i = 0;
+        int i = 0;
 
         for (auto silo = silo_pool.pool.begin(); silo != silo_pool.pool.end(); silo++){
             (*silo)->Init((WINDOW_WIDTH/2 * i) -16 *i);
+            if (i < 2){
+                for (int j = 1; j < 4; j++){
+                    Town * town = town_pool.FirstAvailable();
+                    town->Init((*silo)->horizontalPos + j * 76);
+                }
+            }
             i++;
         }
 
@@ -165,6 +168,14 @@ class Game : public GameObject{
     }
 
     virtual void Draw(){
+        for (auto silo = silo_pool.pool.begin(); silo != silo_pool.pool.end(); silo++){
+            for (int i = 0; i < 3; i++){
+                for (int j = 0; j < player->GetComponent<PlayerBehaviourComponent*>()->GetLeftInSilo(i); j++){
+                    missile_sprite->draw((*silo)->horizontalPos + j*5, (*silo)->verticalPos + 16);
+                }
+            }
+        }
+
         engine->swapBuffers();
         engine->clearWindow();
     }
