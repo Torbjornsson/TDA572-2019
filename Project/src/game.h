@@ -37,7 +37,7 @@ class Game : public GameObject{
 
         player = new Player();
         PlayerBehaviourComponent * player_behaviour = new PlayerBehaviourComponent();
-        player_behaviour->Create(engine, player, &game_objects, &rockets_pool);
+        player_behaviour->Create(engine, player, &game_objects, &rockets_pool, &silo_pool);
         RenderComponent * player_render = new RenderComponent();
         player_render->Create(engine, player, &game_objects, "data/cursor.png");
 

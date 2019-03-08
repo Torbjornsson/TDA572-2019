@@ -16,7 +16,7 @@ const float ROCKET_SPEED = 120.f;
 const static int WINDOW_WIDTH = 640, WINDOW_HEIGHT = 480;
 
 float game_speed = 1.f;
-
+#include "Silo.h"
 #include "Explosion.h"
 #include "Rocket.h"
 #include "player.h"
@@ -25,7 +25,7 @@ float game_speed = 1.f;
 #include "Enemy.h"
 
 #include "Town.h"
-#include "Silo.h"
+
 
 #include "game.h"
 
