@@ -174,7 +174,14 @@ class Game : public GameObject{
         }
 
         if (isLevelWin()){
-            //SDL_Log("Win");
+            int i = 0;
+            for (auto go = towns.pool.begin(); go != towns.pool.end(); go++){
+                if ((*go)->enabled)
+                    i++;
+            }
+            score = i;
+            game_over = true;
+            SDL_Log("score: %i", score);
         }
 
         if (isGameOver()){
