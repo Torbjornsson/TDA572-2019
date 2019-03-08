@@ -28,6 +28,8 @@ class Game : public GameObject{
 
     ObjectPool<Silo> silo_pool;
 
+    ObjectPool<GameObject> towns;
+
    public:
     virtual void Create(AvancezLib* engine){
         //MOVE THIS!!!
@@ -49,11 +51,13 @@ class Game : public GameObject{
 
         enemy = new Enemy();
         EnemyBehaviourComponent * enemy_behaviour = new EnemyBehaviourComponent();
-        enemy_behaviour->Create(engine, enemy, &game_objects, &missiles_pool);
+        enemy_behaviour->Create(engine, enemy, &game_objects, &missiles_pool, &towns);
         enemy->Create();
         enemy->AddComponent(enemy_behaviour);
         enemy->AddReceiver(this);
         game_objects.insert(enemy);
+
+        towns.Create(9);
 
         rockets_pool.Create(30);
         for (auto rocket = rockets_pool.pool.begin(); rocket != rockets_pool.pool.end(); rocket++){
@@ -114,6 +118,7 @@ class Game : public GameObject{
             (*town)->AddComponent(behaviour);
             (*town)->AddReceiver(this);
             game_objects.insert(*town);
+            towns.pool.push_back(*town);
         }
 
         silo_pool.Create(3);
@@ -131,6 +136,7 @@ class Game : public GameObject{
             (*silo)->AddComponent(behaviour);
             (*silo)->AddReceiver(this);
             game_objects.insert(*silo);
+            towns.pool.push_back(*silo);
         }
 
         missile_sprite = engine->createSprite("data/missile.png");

@@ -44,7 +44,6 @@ class PlayerBehaviourComponent : public Component{
                 }
             }
 
-
             if (keys.fire2){
                 if (CanFire(1)){
                     Rocket * rocket = rockets_pool->FirstAvailable();

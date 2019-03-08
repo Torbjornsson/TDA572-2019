@@ -2,6 +2,8 @@
 
 class EnemyBehaviourComponent : public Component{
     ObjectPool<Missile> * missiles_pool;
+    ObjectPool<GameObject> * towns;
+    
     float time_pressed[3];
     int left_insilo[3];
     int x, y;
@@ -9,9 +11,10 @@ class EnemyBehaviourComponent : public Component{
     public:
         virtual ~EnemyBehaviourComponent(){}
 
-        virtual void Create(AvancezLib* engine, GameObject* go, std::set<GameObject*>* game_objects, ObjectPool<Missile>* missiles_pool){
+        virtual void Create(AvancezLib* engine, GameObject* go, std::set<GameObject*>* game_objects, ObjectPool<Missile>* missiles_pool, ObjectPool<GameObject>* towns){
             Component::Create(engine, go, game_objects);
             this->missiles_pool = missiles_pool;
+            this->towns = towns;
         }
 
         virtual void Init(){
@@ -27,22 +30,8 @@ class EnemyBehaviourComponent : public Component{
 
         virtual void Update(float dt){
             go->horizontalPos = rand() % 640;
+            Vector2D endPos = Vector2D(towns->SelectRandom()->horizontalPos+16, WINDOW_HEIGHT-32);
             if (CanFire(0)){    
-                Vector2D endPos = Vector2D(WINDOW_WIDTH - 16, WINDOW_HEIGHT-32);
-                switch (rand() % 3)
-                {
-                    case 0:
-                        endPos = Vector2D(16, WINDOW_HEIGHT - 32);
-                        break;
-                    case 1:
-                        endPos = Vector2D(WINDOW_WIDTH/2, WINDOW_HEIGHT -32);
-                        break;
-                    case 2:
-                        endPos = Vector2D(WINDOW_WIDTH - 16, WINDOW_HEIGHT -32);
-                        break;
-                    default:
-                        break;
-                }
                 Missile * missile = missiles_pool->FirstAvailable();
                 FireRocket(missile, Vector2D(go->horizontalPos, go->verticalPos), endPos);
             }
