@@ -100,9 +100,13 @@ class Game : public GameObject{
         for (auto town = town_pool.pool.begin(); town != town_pool.pool.end(); town++){
             RenderComponent * render = new RenderComponent();
             render->Create(engine, *town, &game_objects, "data/town.png");
+            CollideComponent * collide = new CollideComponent();
+            collide->Create(engine, *town, &game_objects, (ObjectPool<GameObject>*) &missiles_pool);
 
             (*town)->Create();
             (*town)->AddComponent(render);
+            (*town)->AddComponent(collide);
+            (*town)->AddReceiver(this);
             game_objects.insert(*town);
         }
 
@@ -168,12 +172,12 @@ class Game : public GameObject{
     }
 
     virtual void Draw(){
+        int i = 0;
         for (auto silo = silo_pool.pool.begin(); silo != silo_pool.pool.end(); silo++){
-            for (int i = 0; i < 3; i++){
-                for (int j = 0; j < player->GetComponent<PlayerBehaviourComponent*>()->GetLeftInSilo(i); j++){
-                    missile_sprite->draw((*silo)->horizontalPos + j*5, (*silo)->verticalPos + 16);
-                }
+            for (int j = 0; j < player->GetComponent<PlayerBehaviourComponent*>()->GetLeftInSilo(i); j++){
+                missile_sprite->draw((*silo)->horizontalPos + j*5, (*silo)->verticalPos + 16);
             }
+            i++;
         }
 
         engine->swapBuffers();
