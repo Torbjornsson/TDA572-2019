@@ -6,8 +6,10 @@ class MissileBehaviourComponent : public Component{
 
             engine->drawLine(go->start_pos.x, go->start_pos.y, go->horizontalPos, go->verticalPos);
 
-            if (go->verticalPos >= WINDOW_HEIGHT)
+            if (go->verticalPos >= WINDOW_HEIGHT){
+                go->Send(LEVEL_WIN);
                 go->enabled = false;
+            }
         }
 };
 
@@ -20,6 +22,7 @@ class Missile : public GameObject{
             end_pos = endpos;
             horizontalPos = xPos;
             verticalPos = 0;
+            radius = 1;
         }
 
         virtual void Receive(Message m){
@@ -31,6 +34,7 @@ class Missile : public GameObject{
                 //change to a timer and expand radious
                 enabled = false;
                 SDL_Log("Missile::Hit");
+                Send(LEVEL_WIN);
             }
         }
 };

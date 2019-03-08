@@ -7,6 +7,7 @@ class Town : public GameObject{
             GameObject::Init();
             horizontalPos = xPos;
             verticalPos = WINDOW_HEIGHT - 48;
+            radius = 16;
         }
 
         virtual void Recieve(Message m){

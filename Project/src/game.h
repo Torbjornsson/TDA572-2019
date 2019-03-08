@@ -8,6 +8,8 @@ class Game : public GameObject{
 
     bool game_over, level_win;
 
+    int missiles = 10;
+
     unsigned int score = 0;
 
     Sprite * missile_sprite;
@@ -50,6 +52,7 @@ class Game : public GameObject{
         enemy_behaviour->Create(engine, enemy, &game_objects, &missiles_pool);
         enemy->Create();
         enemy->AddComponent(enemy_behaviour);
+        enemy->AddReceiver(this);
         game_objects.insert(enemy);
 
         rockets_pool.Create(30);
@@ -71,12 +74,12 @@ class Game : public GameObject{
         for (auto explosion = explosions_pool.pool.begin(); explosion != explosions_pool.pool.end(); explosion++){
             ExplosionBehaviourComponent * behaviour = new ExplosionBehaviourComponent();
             behaviour->Create(engine, *explosion, &game_objects);
-            //CollideComponent * collide = new CollideComponent();
-            //collide->Create(engine, *explosion, &game_objects, (ObjectPool<GameObject>*) &missiles_pool);
+            CollideComponent * collide = new CollideComponent();
+            collide->Create(engine, *explosion, &game_objects, (ObjectPool<GameObject>*) &missiles_pool);
 
             (*explosion)->Create();
             (*explosion)->AddComponent(behaviour);
-            //(*explosion)->AddComponent(collide);
+            (*explosion)->AddComponent(collide);
             (*explosion)->AddReceiver(this);
         }
 
@@ -86,13 +89,13 @@ class Game : public GameObject{
             behaviour->Create(engine, *missile, &game_objects);
             RigidBodyComponent * rigid = new RigidBodyComponent();
             rigid->Create(engine, *missile, &game_objects);
-            CollideComponent * collide = new CollideComponent();
-            collide->Create(engine, *missile, &game_objects, (ObjectPool<GameObject>*) &explosions_pool);
+            //CollideComponent * collide = new CollideComponent();
+            //collide->Create(engine, *missile, &game_objects, (ObjectPool<GameObject>*) &explosions_pool);
 
             (*missile)->Create();
             (*missile)->AddComponent(behaviour);
             (*missile)->AddComponent(rigid);
-            (*missile)->AddComponent(collide);
+            //(*missile)->AddComponent(collide);
             (*missile)->AddReceiver(this);
         }
 
@@ -159,7 +162,7 @@ class Game : public GameObject{
         }
 
         if (isLevelWin()){
-            SDL_Log("Win");
+            //SDL_Log("Win");
         }
 
         if (isGameOver()){
@@ -175,7 +178,7 @@ class Game : public GameObject{
         int i = 0;
         for (auto silo = silo_pool.pool.begin(); silo != silo_pool.pool.end(); silo++){
             for (int j = 0; j < player->GetComponent<PlayerBehaviourComponent*>()->GetLeftInSilo(i); j++){
-                missile_sprite->draw((*silo)->horizontalPos + j*5, (*silo)->verticalPos + 16);
+                missile_sprite->draw((*silo)->horizontalPos + j * 5, (*silo)->verticalPos + 16);
             }
             i++;
         }
@@ -185,7 +188,12 @@ class Game : public GameObject{
     }
 
     virtual void Receive(Message m){
-
+        if (m == LEVEL_WIN){
+            missiles--;
+            SDL_Log("missiles %i", missiles);
+            if (missiles == 0)
+                level_win = true;   
+        }
     }
 
     void newLevel(){

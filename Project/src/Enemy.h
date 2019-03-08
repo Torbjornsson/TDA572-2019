@@ -27,8 +27,7 @@ class EnemyBehaviourComponent : public Component{
 
         virtual void Update(float dt){
             go->horizontalPos = rand() % 640;
-            
-            if (CanFire(0)){
+            if (CanFire(0)){    
                 Vector2D endPos = Vector2D(WINDOW_WIDTH - 32, WINDOW_HEIGHT);
                 switch (rand() % 3)
                 {
@@ -49,13 +48,13 @@ class EnemyBehaviourComponent : public Component{
             }
         }
 
-    bool CanFire(int n)
-	    {
+    bool CanFire(int n){
 		// shoot just if enough time passed by
-        if (left_insilo[n] == 0)
+        if (left_insilo[n] == 0){
             return false;
+        }
 
-		if ((engine->getElapsedTime() - time_pressed[n]) < (FIRE_TIME_INTERVAL / game_speed))
+		if ((engine->getElapsedTime() - time_pressed[n]) < (FIRE_TIME_INTERVAL / game_speed * 2))
 			return false;
 
 		time_pressed[n] = engine->getElapsedTime();
@@ -90,9 +89,7 @@ public:
 
     virtual void Receive(Message m){
         if (m == HIT){
-            SDL_Log("Enemy::HIT");
-
-            
+            SDL_Log("Enemy::HIT");            
         }
     }
 };

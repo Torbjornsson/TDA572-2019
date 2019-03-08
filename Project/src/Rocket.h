@@ -29,7 +29,7 @@ class RocketBehaviourComponent : public Component{
                 SDL_Log("explode!!");
                 Explosion * explosion = explosions_pool->FirstAvailable();
                 if (explosion != NULL){
-                    explosion->Init(go->horizontalPos, go->verticalPos, 1);
+                    explosion->Init(go->horizontalPos, go->verticalPos, 4);
                     game_objects->insert(explosion);
                 }
                 go->enabled = false;

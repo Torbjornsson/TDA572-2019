@@ -21,7 +21,6 @@ void CollideComponent::Update(float dt){
                 coll_go->Receive(HIT);
                 go->Receive(HIT);
             }
-            
         }
     }
 }
@@ -36,7 +35,7 @@ bool CollideComponent::boxCollide(GameObject * go, GameObject * coll_go){
 
 //Check if point is iside the circle
 bool CollideComponent::circleCollide(GameObject * go, GameObject * coll_go){
-    double x_diff = go->horizontalPos - coll_go->horizontalPos;
-    double y_diff = go->verticalPos - coll_go->verticalPos;
+    double x_diff = go->horizontalPos+ 16 - coll_go->horizontalPos;
+    double y_diff = go->verticalPos +16 - coll_go->verticalPos;
     return (std::sqrt(x_diff * x_diff + y_diff * y_diff) <= go->radius);
 }
