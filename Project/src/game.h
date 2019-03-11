@@ -32,7 +32,6 @@ class Game : public GameObject{
 
    public:
     virtual void Create(AvancezLib* engine){
-        //MOVE THIS!!!
         SDL_Log("Game::Create");
 
         this->engine = engine;
@@ -56,21 +55,17 @@ class Game : public GameObject{
         enemy->AddComponent(enemy_behaviour);
         enemy->AddReceiver(this);
         game_objects.insert(enemy);
-
         towns.Create(9);
 
         rockets_pool.Create(30);
         for (auto rocket = rockets_pool.pool.begin(); rocket != rockets_pool.pool.end(); rocket++){
             RocketBehaviourComponent * behaviour = new RocketBehaviourComponent();
             behaviour->Create(engine, *rocket, &game_objects, &explosions_pool);
-            //RenderComponent * render = new RenderComponent();
-            //render->Create(engine, *rocket, &game_objects, "data/missile.png");
             RigidBodyComponent * rigidBodyComponent = new RigidBodyComponent();
             rigidBodyComponent->Create(engine, *rocket, &game_objects);
 
             (*rocket)->Create();
             (*rocket)->AddComponent(behaviour);
-            //(*rocket)->AddComponent(render);
             (*rocket)->AddComponent(rigidBodyComponent);
         }
 
@@ -93,13 +88,10 @@ class Game : public GameObject{
             behaviour->Create(engine, *missile, &game_objects);
             RigidBodyComponent * rigid = new RigidBodyComponent();
             rigid->Create(engine, *missile, &game_objects);
-            //CollideComponent * collide = new CollideComponent();
-            //collide->Create(engine, *missile, &game_objects, (ObjectPool<GameObject>*) &explosions_pool);
 
             (*missile)->Create();
             (*missile)->AddComponent(behaviour);
             (*missile)->AddComponent(rigid);
-            //(*missile)->AddComponent(collide);
             (*missile)->AddReceiver(this);
         }
 
@@ -173,7 +165,7 @@ class Game : public GameObject{
             engine->quit();
         }
 
-        if (isLevelWin()){
+        if (isLevelWin() && !isGameOver()){
             int i = 0;
             for (auto go = town_pool.pool.begin(); go != town_pool.pool.end(); go++){
                 if ((*go)->enabled)
@@ -183,9 +175,8 @@ class Game : public GameObject{
             for (int n = 0; n < 3; n++){
                 j += player->GetComponent<PlayerBehaviourComponent*>()->GetLeftInSilo(n);
             }
-            score += 50 * i + 5 * j;
+            score += 100 * i + 5 * j;
             newLevel();
-            SDL_Log("score: %i", score);
         }
 
         if (isGameOver()){
@@ -221,6 +212,9 @@ class Game : public GameObject{
     }
 
     virtual void Receive(Message m){
+        if (m == MISSILE_HIT)
+            score += 25;
+
         if (m == GAME_OVER){
             if (towns.SelectRandom() == NULL)
                 game_over = true;
@@ -228,7 +222,6 @@ class Game : public GameObject{
 
         if (m == LEVEL_WIN){
             missiles--;
-            SDL_Log("missiles %i", missiles);
             if (missiles == 0)
                 level_win = true;   
         }

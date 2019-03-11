@@ -23,7 +23,7 @@ class PlayerBehaviourComponent : public Component{
 
             for (int i = 0; i < 3; i++){
                 time_pressed[i] = -10000.f;
-                left_insilo[i] = 6;
+                left_insilo[i] = 7;
             }
         }
 
@@ -79,7 +79,6 @@ class PlayerBehaviourComponent : public Component{
 		time_pressed[n] = engine->getElapsedTime();
         left_insilo[n]--;
 
-		SDL_Log("fire! %i", n);
 		return true;
 	}
 
@@ -96,7 +95,7 @@ class PlayerBehaviourComponent : public Component{
     void Reset(){
         for (int i = 0; i < 3; i++){
                 time_pressed[i] = -10000.f;
-                left_insilo[i] = 6;
+                left_insilo[i] = 7;
             }
     }
 };
@@ -114,10 +113,7 @@ public:
     }
 
     virtual void Receive(Message m){
-        if (m == HIT){
-            SDL_Log("Player::HIT");
-
-            
-        }
+        if (!enabled)
+            return;
     }
 };

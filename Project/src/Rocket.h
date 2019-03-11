@@ -25,7 +25,7 @@ class RocketBehaviourComponent : public Component{
                 go->enabled = false;
             }
 
-            if (go->verticalPos <= go->end_pos.y){
+            if (go->verticalPos < go->end_pos.y){
                 SDL_Log("explode!!");
                 Explosion * explosion = explosions_pool->FirstAvailable();
                 if (explosion != NULL){
@@ -44,7 +44,7 @@ class Rocket : public GameObject{
             GameObject::Init();
             
             end_pos = endpos;
-            double yPos = 480 - 52;
+            double yPos = 480 - 32;
             
             horizontalPos = xPos;
             verticalPos = yPos;

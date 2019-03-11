@@ -5,7 +5,7 @@
 
 class Component;
 
-enum Message { HIT, ALIEN_HIT, GAME_OVER, LEVEL_WIN, NO_MSG, QUIT };
+enum Message { HIT, MISSILE_HIT, GAME_OVER, LEVEL_WIN, NO_MSG, QUIT };
 class GameObject{
     protected:
         std::vector<GameObject*> receivers;

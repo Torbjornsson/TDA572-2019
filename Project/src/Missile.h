@@ -30,7 +30,6 @@ class Missile : public GameObject{
             }
 
             if (m == HIT){
-                //change to a timer and expand radious
                 enabled = false;
                 SDL_Log("Missile::Hit");
                 Send(LEVEL_WIN);

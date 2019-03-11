@@ -7,7 +7,6 @@ class ExplosionBehaviourComponent : public Component{
             engine->drawCircle(go->horizontalPos, go->verticalPos, go->radius);
 
             if (go->radius >= 32){
-                SDL_Log("Explosion::fin");
                 go->enabled = false;
             }
         }
@@ -15,25 +14,19 @@ class ExplosionBehaviourComponent : public Component{
 
 class Explosion : public GameObject{
     public:
-        virtual void Init(double xPos, double yPos, double _radius){
-            SDL_Log("Explosion::Init");
+        virtual void Init(double xPos, double yPos, double rad){
             GameObject::Init();
 
             horizontalPos = xPos;
             verticalPos = yPos;
-            radius = _radius;
-
+            radius = rad;
         }
 
         virtual void Receive(Message m){
             if (!enabled){
                 return;
             }
-
-            if (m == HIT){
-                //change to a timer and expand radius
-                //enabled = false;
-                SDL_Log("Explosion::Hit");
-            }
+            if (m == HIT)
+                Send(MISSILE_HIT);
         }
 };

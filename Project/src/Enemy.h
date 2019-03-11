@@ -49,7 +49,6 @@ class EnemyBehaviourComponent : public Component{
 		time_pressed[n] = engine->getElapsedTime();
         left_insilo[n]--;
 
-		SDL_Log("Missile! %i", n);
 		return true;
 	}
 
@@ -69,9 +68,6 @@ class EnemyBehaviourComponent : public Component{
 };
 
 class Enemy : public GameObject{
-
-private:
-    /* data */
 public:
     virtual ~Enemy() {SDL_Log("Enemy::~Enemy");}
 
@@ -81,6 +77,9 @@ public:
     }
 
     virtual void Receive(Message m){
+        if (!enabled)
+            return;
+
         if (m == HIT){
             SDL_Log("Enemy::HIT");            
         }
