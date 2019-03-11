@@ -10,14 +10,6 @@ class RocketBehaviourComponent : public Component{
             this->explosions_pool = explosions_pool;
         }
         void Update(float dt){
-            //make a travel speed for player missiles
-            //go->verticalPos -= ROCKET_SPEED * dt;
-
-            //float d = go->start_pos.dotProduct(go->end_pos);
-            //Vector2D a = go->start_pos.operator+(Vector2D(ROCKET_SPEED*dt*d, ROCKET_SPEED*dt*d));
-            //go->horizontalPos += a.x;
-            //go->verticalPos += a.y;
-
             engine->drawLine(go->start_pos.x, go->start_pos.y, go->horizontalPos, go->verticalPos);
 
             //guard if missile goes out of the screen
