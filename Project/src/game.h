@@ -175,12 +175,16 @@ class Game : public GameObject{
 
         if (isLevelWin()){
             int i = 0;
-            for (auto go = towns.pool.begin(); go != towns.pool.end(); go++){
+            for (auto go = town_pool.pool.begin(); go != town_pool.pool.end(); go++){
                 if ((*go)->enabled)
                     i++;
             }
-            score = i;
-            game_over = true;
+            int j = 0;
+            for (int n = 0; n < 3; n++){
+                j += player->GetComponent<PlayerBehaviourComponent*>()->GetLeftInSilo(n);
+            }
+            score += 50 * i + 5 * j;
+            newLevel();
             SDL_Log("score: %i", score);
         }
 
@@ -188,12 +192,22 @@ class Game : public GameObject{
             dt = 0.f;
         }
 
+        if (!isGameOver()){
         for (auto go = game_objects.begin(); go != game_objects.end(); go++){
             (*go)->Update(dt);
-        }
+        }}
     }
 
     virtual void Draw(){
+        char msg[1024];
+		sprintf(msg, "%07d", Score());
+		engine->drawText(300, 32, msg);
+
+        if (isGameOver()){
+			sprintf(msg, "*** G A M E  O V E R ***");
+			engine->drawText(250, 8, msg);
+		}
+
         int i = 0;
         for (auto silo = silo_pool.pool.begin(); silo != silo_pool.pool.end(); silo++){
             for (int j = 0; j < player->GetComponent<PlayerBehaviourComponent*>()->GetLeftInSilo(i); j++){
@@ -207,6 +221,11 @@ class Game : public GameObject{
     }
 
     virtual void Receive(Message m){
+        if (m == GAME_OVER){
+            if (towns.SelectRandom() == NULL)
+                game_over = true;
+        }
+
         if (m == LEVEL_WIN){
             missiles--;
             SDL_Log("missiles %i", missiles);
@@ -216,7 +235,13 @@ class Game : public GameObject{
     }
 
     void newLevel(){
-
+        player->GetComponent<PlayerBehaviourComponent*>()->Reset();
+        enemy->GetComponent<EnemyBehaviourComponent*>()->Reset();
+        for (auto silo = silo_pool.pool.begin(); silo != silo_pool.pool.end(); silo++){
+            (*silo)->enabled = true;
+        }
+        level_win = false;
+        missiles = 10;
     }
 
     bool isLevelWin(){
@@ -239,6 +264,14 @@ class Game : public GameObject{
         }
 
         rockets_pool.Destroy();
+        explosions_pool.Destroy();
+        missiles_pool.Destroy();
+        town_pool.Destroy();
+        silo_pool.Destroy();
+        towns.Destroy();
+        missile_sprite->destroy();
+
         delete player;
+        delete enemy;
     }
 };

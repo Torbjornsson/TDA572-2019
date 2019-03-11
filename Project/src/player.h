@@ -92,6 +92,13 @@ class PlayerBehaviourComponent : public Component{
             game_objects->insert(rocket);
         }
     }
+
+    void Reset(){
+        for (int i = 0; i < 3; i++){
+                time_pressed[i] = -10000.f;
+                left_insilo[i] = 6;
+            }
+    }
 };
 
 class Player : public GameObject{

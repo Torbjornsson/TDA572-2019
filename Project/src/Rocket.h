@@ -55,11 +55,5 @@ class Rocket : public GameObject{
             if (!enabled){
                 return;
             }
-
-            if (m == HIT){
-                //change to a timer and expand radious
-                enabled = false;
-                SDL_Log("Rocket::Hit");
-            }
         }
 };

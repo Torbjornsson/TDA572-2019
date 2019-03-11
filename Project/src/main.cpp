@@ -46,7 +46,7 @@ int main(int argc, char* argv[]){
 	game.Init();
 
     //FPS
-    char msg[256];
+    //char msg[256];
 	//float deltaTime = 0;
 	float lastTime = engine.getElapsedTime();
 

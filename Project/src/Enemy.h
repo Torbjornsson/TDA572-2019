@@ -62,6 +62,10 @@ class EnemyBehaviourComponent : public Component{
             game_objects->insert(missile);
         }
     }
+
+    void Reset(){
+        left_insilo[0] = 10;
+    }
 };
 
 class Enemy : public GameObject{

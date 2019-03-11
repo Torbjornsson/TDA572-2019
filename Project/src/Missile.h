@@ -3,7 +3,6 @@
 class MissileBehaviourComponent : public Component{
     public:
         void Update(float dt){
-
             engine->drawLine(go->start_pos.x, go->start_pos.y, go->horizontalPos, go->verticalPos);
 
             if (go->verticalPos >= WINDOW_HEIGHT){
@@ -35,6 +34,7 @@ class Missile : public GameObject{
                 enabled = false;
                 SDL_Log("Missile::Hit");
                 Send(LEVEL_WIN);
+                Send(GAME_OVER);
             }
         }
 };
