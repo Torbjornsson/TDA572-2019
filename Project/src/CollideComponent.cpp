@@ -13,9 +13,11 @@ void CollideComponent::Update(float dt){
         GameObject * coll_go = coll_objects->pool[i];
 
         if (coll_go->enabled){
-            if (circleCollide(go, coll_go)){
-                go->Receive(HIT);
-                coll_go->Receive(HIT);
+            if ((go->verticalPos - go->radius) <= coll_go->verticalPos){
+                if (circleCollide(go, coll_go)){
+                    go->Receive(HIT);
+                    coll_go->Receive(HIT);            
+                }
             }
         }
     }
