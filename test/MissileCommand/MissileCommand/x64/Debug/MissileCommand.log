@@ -1,0 +1,72 @@
+﻿LINK : error LNK2001: unresolved external symbol /ENTRY int main
+avancezlib.obj : error LNK2019: unresolved external symbol SDL_GetError referenced in function "public: class Sprite * __cdecl AvancezLib::createSprite(char const *)" (?createSprite@AvancezLib@@QEAAPEAVSprite@@PEBD@Z)
+avancezlib.obj : error LNK2019: unresolved external symbol __imp_exit referenced in function "public: void __cdecl AvancezLib::quit(void)" (?quit@AvancezLib@@QEAAXXZ)
+avancezlib.obj : error LNK2019: unresolved external symbol SDL_RWFromFile referenced in function "public: class Sprite * __cdecl AvancezLib::createSprite(char const *)" (?createSprite@AvancezLib@@QEAAPEAVSprite@@PEBD@Z)
+avancezlib.obj : error LNK2019: unresolved external symbol SDL_FreeSurface referenced in function "public: class Sprite * __cdecl AvancezLib::createSprite(char const *)" (?createSprite@AvancezLib@@QEAAPEAVSprite@@PEBD@Z)
+avancezlib.obj : error LNK2019: unresolved external symbol SDL_LoadBMP_RW referenced in function "public: class Sprite * __cdecl AvancezLib::createSprite(char const *)" (?createSprite@AvancezLib@@QEAAPEAVSprite@@PEBD@Z)
+avancezlib.obj : error LNK2019: unresolved external symbol SDL_CreateWindow referenced in function "public: bool __cdecl AvancezLib::init(int,int)" (?init@AvancezLib@@QEAA_NHH@Z)
+avancezlib.obj : error LNK2019: unresolved external symbol SDL_DestroyWindow referenced in function "public: void __cdecl AvancezLib::destroy(void)" (?destroy@AvancezLib@@QEAAXXZ)
+avancezlib.obj : error LNK2019: unresolved external symbol SDL_PollEvent referenced in function "public: void __cdecl AvancezLib::processInput(void)" (?processInput@AvancezLib@@QEAAXXZ)
+avancezlib.obj : error LNK2019: unresolved external symbol SDL_Log referenced in function "public: void __cdecl AvancezLib::destroy(void)" (?destroy@AvancezLib@@QEAAXXZ)
+GameObject.obj : error LNK2001: unresolved external symbol SDL_Log
+MissileCommand.obj : error LNK2001: unresolved external symbol SDL_Log
+avancezlib.obj : error LNK2019: unresolved external symbol SDL_LogError referenced in function "public: class Sprite * __cdecl AvancezLib::createSprite(char const *)" (?createSprite@AvancezLib@@QEAAPEAVSprite@@PEBD@Z)
+avancezlib.obj : error LNK2019: unresolved external symbol SDL_CreateRenderer referenced in function "public: bool __cdecl AvancezLib::init(int,int)" (?init@AvancezLib@@QEAA_NHH@Z)
+avancezlib.obj : error LNK2019: unresolved external symbol SDL_CreateTextureFromSurface referenced in function "public: class Sprite * __cdecl AvancezLib::createSprite(char const *)" (?createSprite@AvancezLib@@QEAAPEAVSprite@@PEBD@Z)
+avancezlib.obj : error LNK2019: unresolved external symbol SDL_QueryTexture referenced in function "public: void __cdecl Sprite::draw(int,int)" (?draw@Sprite@@QEAAXHH@Z)
+avancezlib.obj : error LNK2019: unresolved external symbol SDL_SetRenderDrawColor referenced in function "public: void __cdecl AvancezLib::clearWindow(void)" (?clearWindow@AvancezLib@@QEAAXXZ)
+avancezlib.obj : error LNK2019: unresolved external symbol SDL_RenderClear referenced in function "public: void __cdecl AvancezLib::clearWindow(void)" (?clearWindow@AvancezLib@@QEAAXXZ)
+avancezlib.obj : error LNK2019: unresolved external symbol SDL_RenderDrawPoint referenced in function "public: void __cdecl AvancezLib::drawPixel(int,int)" (?drawPixel@AvancezLib@@QEAAXHH@Z)
+avancezlib.obj : error LNK2019: unresolved external symbol SDL_RenderDrawLine referenced in function "public: void __cdecl AvancezLib::drawLine(int,int,int,int)" (?drawLine@AvancezLib@@QEAAXHHHH@Z)
+avancezlib.obj : error LNK2019: unresolved external symbol SDL_RenderCopy referenced in function "public: void __cdecl Sprite::draw(int,int)" (?draw@Sprite@@QEAAXHH@Z)
+avancezlib.obj : error LNK2019: unresolved external symbol SDL_RenderPresent referenced in function "public: void __cdecl AvancezLib::swapBuffers(void)" (?swapBuffers@AvancezLib@@QEAAXXZ)
+avancezlib.obj : error LNK2019: unresolved external symbol SDL_DestroyTexture referenced in function "public: void __cdecl Sprite::destroy(void)" (?destroy@Sprite@@QEAAXXZ)
+avancezlib.obj : error LNK2019: unresolved external symbol SDL_DestroyRenderer referenced in function "public: void __cdecl AvancezLib::destroy(void)" (?destroy@AvancezLib@@QEAAXXZ)
+avancezlib.obj : error LNK2019: unresolved external symbol SDL_GetTicks referenced in function "public: float __cdecl AvancezLib::getElapsedTime(void)" (?getElapsedTime@AvancezLib@@QEAAMXZ)
+avancezlib.obj : error LNK2019: unresolved external symbol SDL_Init referenced in function "public: bool __cdecl AvancezLib::init(int,int)" (?init@AvancezLib@@QEAA_NHH@Z)
+avancezlib.obj : error LNK2019: unresolved external symbol SDL_Quit referenced in function "public: void __cdecl AvancezLib::destroy(void)" (?destroy@AvancezLib@@QEAAXXZ)
+avancezlib.obj : error LNK2019: unresolved external symbol TTF_Init referenced in function "public: bool __cdecl AvancezLib::init(int,int)" (?init@AvancezLib@@QEAA_NHH@Z)
+avancezlib.obj : error LNK2019: unresolved external symbol TTF_OpenFont referenced in function "public: bool __cdecl AvancezLib::init(int,int)" (?init@AvancezLib@@QEAA_NHH@Z)
+avancezlib.obj : error LNK2019: unresolved external symbol TTF_RenderText_Solid referenced in function "public: void __cdecl AvancezLib::drawText(int,int,char const *)" (?drawText@AvancezLib@@QEAAXHHPEBD@Z)
+avancezlib.obj : error LNK2019: unresolved external symbol TTF_CloseFont referenced in function "public: void __cdecl AvancezLib::destroy(void)" (?destroy@AvancezLib@@QEAAXXZ)
+avancezlib.obj : error LNK2019: unresolved external symbol TTF_Quit referenced in function "public: void __cdecl AvancezLib::destroy(void)" (?destroy@AvancezLib@@QEAAXXZ)
+avancezlib.obj : error LNK2019: unresolved external symbol TTF_WasInit referenced in function "public: bool __cdecl AvancezLib::init(int,int)" (?init@AvancezLib@@QEAA_NHH@Z)
+avancezlib.obj : error LNK2019: unresolved external symbol filledCircleRGBA referenced in function "public: void __cdecl AvancezLib::drawCircle(int,int,int)" (?drawCircle@AvancezLib@@QEAAXHHH@Z)
+avancezlib.obj : error LNK2019: unresolved external symbol strlen referenced in function "public: static unsigned __int64 __cdecl std::char_traits<char>::length(char const * const)" (?length@?$char_traits@D@std@@SA_KQEBD@Z)
+MSVCRTD.lib(gshandlereh.obj) : error LNK2001: unresolved external symbol __CxxFrameHandler3
+avancezlib.obj : error LNK2001: unresolved external symbol __CxxFrameHandler3
+CollideComponent.obj : error LNK2001: unresolved external symbol __CxxFrameHandler3
+GameObject.obj : error LNK2001: unresolved external symbol __CxxFrameHandler3
+MissileCommand.obj : error LNK2001: unresolved external symbol __CxxFrameHandler3
+CollideComponent.obj : error LNK2019: unresolved external symbol __imp__invalid_parameter referenced in function "public: class GameObject * & __cdecl std::vector<class GameObject *,class std::allocator<class GameObject *> >::operator[](unsigned __int64)" (??A?$vector@PEAVGameObject@@V?$allocator@PEAVGameObject@@@std@@@std@@QEAAAEAPEAVGameObject@@_K@Z)
+GameObject.obj : error LNK2001: unresolved external symbol __imp__invalid_parameter
+MissileCommand.obj : error LNK2001: unresolved external symbol __imp__invalid_parameter
+CollideComponent.obj : error LNK2019: unresolved external symbol __imp__CrtDbgReport referenced in function "public: class GameObject * & __cdecl std::vector<class GameObject *,class std::allocator<class GameObject *> >::operator[](unsigned __int64)" (??A?$vector@PEAVGameObject@@V?$allocator@PEAVGameObject@@@std@@@std@@QEAAAEAPEAVGameObject@@_K@Z)
+GameObject.obj : error LNK2001: unresolved external symbol __imp__CrtDbgReport
+MissileCommand.obj : error LNK2001: unresolved external symbol __imp__CrtDbgReport
+CollideComponent.obj : error LNK2019: unresolved external symbol sqrt referenced in function "public: virtual bool __cdecl CollideComponent::circleCollide(class GameObject *,class GameObject *)" (?circleCollide@CollideComponent@@UEAA_NPEAVGameObject@@0@Z)
+GameObject.obj : error LNK2019: unresolved external symbol memmove referenced in function "class Component * * __cdecl std::_Copy_memmove<class Component * *,class Component * *>(class Component * *,class Component * *,class Component * *)" (??$_Copy_memmove@PEAPEAVComponent@@PEAPEAV1@@std@@YAPEAPEAVComponent@@PEAPEAV1@00@Z)
+MissileCommand.obj : error LNK2001: unresolved external symbol memmove
+GameObject.obj : error LNK2019: unresolved external symbol _CxxThrowException referenced in function __catch$??$_Emplace_reallocate@AEBQEAVComponent@@@?$vector@PEAVComponent@@V?$allocator@PEAVComponent@@@std@@@std@@QEAAPEAPEAVComponent@@QEAPEAV2@AEBQEAV2@@Z$0
+MissileCommand.obj : error LNK2001: unresolved external symbol _CxxThrowException
+MSVCRTD.lib(throw_bad_alloc.obj) : error LNK2001: unresolved external symbol _CxxThrowException
+MissileCommand.obj : error LNK2001: unresolved external symbol _purecall
+MissileCommand.obj : error LNK2019: unresolved external symbol SDL_GetMouseState referenced in function "public: virtual void __cdecl PlayerBehaviourComponent::Update(float)" (?Update@PlayerBehaviourComponent@@UEAAXM@Z)
+MSVCRTD.lib(new_scalar.obj) : error LNK2019: unresolved external symbol _callnewh referenced in function "void * __cdecl operator new(unsigned __int64)" (??2@YAPEAX_K@Z)
+MSVCRTD.lib(new_scalar.obj) : error LNK2019: unresolved external symbol malloc referenced in function "void * __cdecl operator new(unsigned __int64)" (??2@YAPEAX_K@Z)
+MSVCRTD.lib(init.obj) : error LNK2019: unresolved external symbol _CrtDbgReport referenced in function _CRT_RTC_INIT
+MSVCRTD.lib(init.obj) : error LNK2019: unresolved external symbol _CrtDbgReportW referenced in function _CRT_RTC_INITW
+MSVCRTD.lib(throw_bad_alloc.obj) : error LNK2019: unresolved external symbol __std_exception_copy referenced in function "public: __cdecl std::exception::exception(class std::exception const &)" (??0exception@std@@QEAA@AEBV01@@Z)
+MSVCRTD.lib(throw_bad_alloc.obj) : error LNK2019: unresolved external symbol __std_exception_destroy referenced in function "public: virtual __cdecl std::exception::~exception(void)" (??1exception@std@@UEAA@XZ)
+MSVCRTD.lib(delete_scalar.obj) : error LNK2019: unresolved external symbol _free_dbg referenced in function "void __cdecl operator delete(void *)" (??3@YAXPEAX@Z)
+MSVCRTD.lib(error.obj) : error LNK2019: unresolved external symbol strcpy_s referenced in function "void __cdecl _RTC_StackFailure(void *,char const *)" (?_RTC_StackFailure@@YAXPEAXPEBD@Z)
+MSVCRTD.lib(error.obj) : error LNK2019: unresolved external symbol strcat_s referenced in function "void __cdecl _RTC_StackFailure(void *,char const *)" (?_RTC_StackFailure@@YAXPEAXPEBD@Z)
+MSVCRTD.lib(error.obj) : error LNK2019: unresolved external symbol __stdio_common_vsprintf_s referenced in function _vsprintf_s_l
+MSVCRTD.lib(error.obj) : error LNK2001: unresolved external symbol __C_specific_handler_noexcept
+MSVCRTD.lib(pdblkup.obj) : error LNK2019: unresolved external symbol _wmakepath_s referenced in function "int __cdecl GetPdbDllPathFromFilePath(wchar_t const *,wchar_t *,unsigned __int64)" (?GetPdbDllPathFromFilePath@@YAHPEB_WPEA_W_K@Z)
+MSVCRTD.lib(pdblkup.obj) : error LNK2019: unresolved external symbol _wsplitpath_s referenced in function "int __cdecl GetPdbDllPathFromFilePath(wchar_t const *,wchar_t *,unsigned __int64)" (?GetPdbDllPathFromFilePath@@YAHPEB_WPEA_W_K@Z)
+MSVCRTD.lib(pdblkup.obj) : error LNK2019: unresolved external symbol wcscpy_s referenced in function "int __cdecl GetPdbDllPathFromFilePath(wchar_t const *,wchar_t *,unsigned __int64)" (?GetPdbDllPathFromFilePath@@YAHPEB_WPEA_W_K@Z)
+MSVCRTD.lib(pdblkup.obj) : error LNK2019: unresolved external symbol __vcrt_GetModuleFileNameW referenced in function "struct HINSTANCE__ * __cdecl GetPdbDll(void)" (?GetPdbDll@@YAPEAUHINSTANCE__@@XZ)
+MSVCRTD.lib(pdblkup.obj) : error LNK2019: unresolved external symbol __vcrt_GetModuleHandleW referenced in function "struct HINSTANCE__ * __cdecl GetPdbDll(void)" (?GetPdbDll@@YAPEAUHINSTANCE__@@XZ)
+MSVCRTD.lib(pdblkup.obj) : error LNK2019: unresolved external symbol __vcrt_LoadLibraryExW referenced in function "struct HINSTANCE__ * __cdecl GetPdbDll(void)" (?GetPdbDll@@YAPEAUHINSTANCE__@@XZ)
+D:\gameengine\TDA572-2019\test\MissileCommand\x64\Debug\MissileCommand.exe : fatal error LNK1120: 58 unresolved externals

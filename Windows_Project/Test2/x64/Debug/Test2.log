@@ -1,0 +1,29 @@
+﻿  pch.cpp
+  avancezlib.cpp
+  CollideComponent.cpp
+  Component.cpp
+  GameObject.cpp
+  RenderComponent.cpp
+  Test2.cpp
+d:\gameengine\tda572-2019\windows_project\test2\explosion.h(7): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+d:\gameengine\tda572-2019\windows_project\test2\rocket.h(13): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+d:\gameengine\tda572-2019\windows_project\test2\missile.h(6): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+d:\gameengine\tda572-2019\windows_project\test2\game.h(205): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+d:\gameengine\tda572-2019\windows_project\test2\test2.cpp(40): warning C4101: 'tx': unreferenced local variable
+d:\gameengine\tda572-2019\windows_project\test2\test2.cpp(40): warning C4101: 'y': unreferenced local variable
+d:\gameengine\tda572-2019\windows_project\test2\test2.cpp(40): warning C4101: 'x': unreferenced local variable
+d:\gameengine\tda572-2019\windows_project\test2\test2.cpp(40): warning C4101: 'ty': unreferenced local variable
+d:\gameengine\tda572-2019\windows_project\test2\object_pool.h(51): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+  d:\gameengine\tda572-2019\windows_project\test2\object_pool.h(50): note: while compiling class template member function 'T *ObjectPool<T>::SelectRandom(void)'
+          with
+          [
+              T=GameObject
+          ]
+  d:\gameengine\tda572-2019\windows_project\test2\enemy.h(33): note: see reference to function template instantiation 'T *ObjectPool<T>::SelectRandom(void)' being compiled
+          with
+          [
+              T=GameObject
+          ]
+  d:\gameengine\tda572-2019\windows_project\test2\enemy.h(33): note: see reference to class template instantiation 'ObjectPool<GameObject>' being compiled
+  Generating Code...
+  Test2.vcxproj -> D:\gameengine\TDA572-2019\Windows_Project\x64\Debug\Test2.exe
